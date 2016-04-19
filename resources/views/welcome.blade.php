@@ -1,45 +1,36 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <title>Laravel</title>
+@extends('layouts.app')
 
-        <link href="https://fonts.googleapis.com/css?family=Lato:100" rel="stylesheet" type="text/css">
-
-        <style>
-            html, body {
-                height: 100%;
-            }
-
-            body {
-                margin: 0;
-                padding: 0;
-                width: 100%;
-                display: table;
-                font-weight: 100;
-                font-family: 'Lato';
-            }
-
-            .container {
-                text-align: center;
-                display: table-cell;
-                vertical-align: middle;
-            }
-
-            .content {
-                text-align: center;
-                display: inline-block;
-            }
-
-            .title {
-                font-size: 96px;
-            }
-        </style>
-    </head>
-    <body>
-        <div class="container">
-            <div class="content">
-                <div class="title">Laravel 5</div>
-            </div>
+@section('content')
+  <header>
+    <div class="container">
+      <div class="wrapper"></div>
+      <div class="dark"></div>
+      <div class="content">
+        <div class="row">
+          <div class="col-sm-12">
+            <h1>Publi<b>UTT</b></h1>
+            <span>La biblioth&egrave;que des publications scientifiques</span>
+            <div class="clearfix"></div>
+            <span>par les chercheurs de l'UTT</span>
+          </div>
         </div>
-    </body>
-</html>
+        <div class="row">
+          <div class="col-sm-12 action">
+            @if (Auth::guest())
+              <a href="{{ url('/login') }}"><i class="fa fa-angle-right"></i>&nbsp;Je suis chercheur &agrave; l'UTT</a>
+            @else
+              <a href=""><i class="fa fa-angle-right"></i>&nbsp;J'ajoute une publication</a>
+            @endif
+          </div>
+        </div>
+      </div>
+      <div class="bottom-content to-content">
+        <div class="row">
+          <div class="col-sm-12">
+            <i class="fa fa-angle-double-down"></i>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+@endsection
