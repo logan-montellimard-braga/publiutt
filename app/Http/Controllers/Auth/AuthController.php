@@ -3,6 +3,9 @@
 namespace App\Http\Controllers\Auth;
 
 use App\User;
+use App\Auteur;
+use App\Organisation;
+use App\Equipe;
 use Validator;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\ThrottlesLogins;
@@ -49,6 +52,9 @@ class AuthController extends Controller
     protected function validator(array $data)
     {
         return Validator::make($data, [
+            'nom' => 'required|alpha|min:2|max:255',
+            'prenom' => 'required|alpha|min:2|max:255',
+            'equipe' => 'required|integer|min:1',
             'email' => 'required|email|max:255|unique:users',
             'password' => 'required|min:6|confirmed',
         ]);
@@ -62,11 +68,37 @@ class AuthController extends Controller
      */
     protected function create(array $data)
     {
-        return User::create([
+        $auteur = Auteur::create([
+            'nom' => $data['nom'],
+            'prenom' => $data['prenom'],
+            'equipe_id' => $data['equipe'],
+        ]);
+
+        return $auteur->user()->create([
             'email' => $data['email'],
             'is_admin' => false,
-            'auteur_id' => null,
             'password' => bcrypt($data['password']),
         ]);
+    }
+
+    public function showRegistrationForm()
+    {
+        if (property_exists($this, 'registerView')) {
+            return view($this->registerView);
+        }
+
+        $etablissement = 'Université de Technologie de Troyes';
+
+        $data = array();
+        $organisation = Organisation::where('etablissement', $etablissement)
+                                    ->take(1)
+                                    ->get();
+        $equipes = array();
+        foreach ($organisation as $org) {
+            $equipes = array_merge($equipes, $org->equipes()->get()->all());
+        }
+        $data['equipes'] = $equipes;
+        $data['etablissement'] = $etablissement;
+        return view('auth.register', $data);
     }
 }
