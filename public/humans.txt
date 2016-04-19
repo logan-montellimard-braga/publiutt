@@ -1,0 +1,15 @@
+# humanstxt.org/
+# The humans responsible & technology colophon
+
+# TEAM
+
+    Logan BRAGA -- Développeur -- loganbraga.fr
+    Peirun YU -- Développeur
+
+# TECHNOLOGY COLOPHON
+
+    HTML5, CSS3
+    jQuery, Modernizr
+    Bootstrap3, FontAwesome
+    PHP5
+    Laravel5
