@@ -67,6 +67,7 @@ body {
   overflow-y: hidden;
   background: #f9f9f9;
   color: #333;
+  margin-top: 60px;
 }
 
 #loader {
@@ -174,10 +175,18 @@ nav a {
   box-shadow: none;
 }
 
-input[type="text"], input[type="password"], textarea, select {
+input[type="text"], input[type="email"], input[type="number"], input[type="password"], textarea, select {
   outline: none;
   box-shadow:none !important;
   border:1px solid #ccc;
+}
+
+.help-block {
+  text-align: right;
+  margin-bottom: 25px;
+  font-variant: small-caps;
+  text-transform: uppercase;
+  font-size: 0.8em;
 }
 
 header {
@@ -231,6 +240,15 @@ header .content span {
   text-transform: uppercase;
   font-variant: small-caps;
   background: white;
+}
+
+.auth nav, .auth footer {
+  display: none;
+  visibility: hidden;
+}
+
+body.auth {
+  margin-top: 0;
 }
 
 .background {
