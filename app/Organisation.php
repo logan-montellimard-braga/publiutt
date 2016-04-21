@@ -4,6 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use App\Equipe;
+use App\Auteur;
 
 class Organisation extends Model
 {
@@ -12,5 +13,10 @@ class Organisation extends Model
     public function equipes()
     {
         return $this->hasMany(Equipe::class);
+    }
+
+    public function auteurs()
+    {
+        return $this->hasManyThrough(Auteur::class, Equipe::class);
     }
 }

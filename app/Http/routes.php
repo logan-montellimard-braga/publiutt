@@ -15,6 +15,22 @@ Route::get('/', ['as' => 'root', function () {
     return view('welcome');
 }]);
 
-Route::auth();
+Route::get('/organisations', 'OrganisationController@index');
+Route::post('/organisations', 'OrganisationController@store');
+Route::delete('/organisations/{organisation}', 'OrganisationController@destroy');
 
-/* Route::get('/home', 'HomeController@index'); */
+Route::get('/equipes', 'EquipeController@index');
+Route::post('/equipes', 'EquipeController@store');
+Route::delete('/equipes/{equipe}', 'EquipeController@destroy');
+
+Route::get('/auteurs', 'AuteurController@index');
+Route::get('/auteurs/{auteur}', 'AuteurController@show');
+Route::post('/auteurs', 'AuteurController@store');
+Route::delete('/auteurs/{auteur}', 'AuteurController@destroy');
+
+Route::get('/publications', 'PublicationController@index');
+Route::get('/publications/new', 'PublicationController@new');
+Route::post('/publications', 'PublicationController@store');
+Route::delete('/publications/{publication}', 'PublicationController@destroy');
+
+Route::auth();

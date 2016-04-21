@@ -1,5 +1,7 @@
 @extends('layouts.app')
 
+@section('title', 'Inscription')
+
 @section('content')
 <section class="background full flex-center">
     <div class="container">
@@ -14,7 +16,7 @@
                           <div class="input-group-addon">
                             <i class="fa fa-fw fa-envelope"></i>
                           </div>
-                          <input name="email" type="email" class="form-control input-lg" value="{{ old('email') }}" placeholder="Adresse e-mail...">
+                          <input autofocus required name="email" type="email" class="form-control input-lg" value="{{ old('email') }}" placeholder="Adresse e-mail...">
                         </div>
                           @if ($errors->has('email'))
                               <span class="help-block">
@@ -28,7 +30,7 @@
                         <div class="input-group-addon">
                           <i class="fa fa-fw fa-lock"></i>
                         </div>
-                        <input name="password" type="password" class="form-control input-lg" placeholder="Mot de passe...">
+                        <input required name="password" type="password" class="form-control input-lg" placeholder="Mot de passe...">
                       </div>
                       @if ($errors->has('password'))
                           <span class="help-block">
@@ -42,7 +44,7 @@
                         <div class="input-group-addon">
                           <i class="fa fa-fw fa-lock"></i>
                         </div>
-                        <input name="password_confirmation" type="password" class="form-control input-lg" placeholder="Confirmation du mot de passe...">
+                        <input required name="password_confirmation" type="password" class="form-control input-lg" placeholder="Confirmation du mot de passe...">
                       </div>
                       @if ($errors->has('password_confirmation'))
                           <span class="help-block">
@@ -58,7 +60,7 @@
                         <div class="input-group-addon">
                           <i class="fa fa-fw fa-tag"></i>
                         </div>
-                        <input type="text" name="nom" value="{{ old('nom') }}" class="form-control input-lg" placeholder="Nom...">
+                        <input required type="text" name="nom" value="{{ old('nom') }}" class="form-control input-lg" placeholder="Nom...">
                       </div>
                       @if ($errors->has('nom'))
                           <span class="help-block">
@@ -72,7 +74,7 @@
                         <div class="input-group-addon">
                           <i class="fa fa-fw fa-tag"></i>
                         </div>
-                        <input type="text" name="prenom" value="{{ old('prenom') }}" class="form-control input-lg" placeholder="Prénom...">
+                        <input required type="text" name="prenom" value="{{ old('prenom') }}" class="form-control input-lg" placeholder="Prénom...">
                       </div>
                       @if ($errors->has('nom'))
                           <span class="help-block">

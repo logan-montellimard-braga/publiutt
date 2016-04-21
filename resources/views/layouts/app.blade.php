@@ -6,7 +6,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-  <title>Publi'UTT &middot; Accueil</title>
+  <title>Publi'UTT &middot; @yield('title')</title>
   <meta name="description" content="">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="apple-touch-icon" href="apple-touch-icon.png">
@@ -81,6 +81,25 @@
       </div>
     </div>
   </nav>
+
+  @if(Session::has('flash_message'))
+    <div class="alert alert-success alert-dismissible">
+       <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+      <span class="fa fa-check"></span>&nbsp;{!! session('flash_message') !!}
+    </div>
+  @endif
+  @if(Session::has('flash_message_error'))
+    <div class="alert alert-danger alert-dismissible">
+       <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+      <span class="fa fa-times"></span>&nbsp;{!! session('flash_message_error') !!}
+    </div>
+  @endif
+
+  @if (Route::getCurrentRoute()->getName() !== 'root')
+    <header id="band">
+      <h1>@yield('title')</h1>
+    </header>
+  @endif
 
   @yield('content')
 

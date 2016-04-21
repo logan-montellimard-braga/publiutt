@@ -189,7 +189,7 @@ input[type="text"], input[type="email"], input[type="number"], input[type="passw
   font-size: 0.8em;
 }
 
-header {
+header.main  {
   min-height: 600px;
   height: 95vh;
   width: 100%;
@@ -200,14 +200,14 @@ header {
   margin-bottom: 100px;
 }
 
-header .content, header .bottom-content {
+header.main  .content, header.main  .bottom-content {
   text-align: left;
   color: white;
   width: 100%;
   /* margin-left: 5vw; */
 }
 
-header .content h1 {
+header.main  .content h1 {
   font-weight: 300 !important;
   font-family: 'Open Sans';
   font-size: 4em;
@@ -217,7 +217,7 @@ header .content h1 {
   transition: all 0.3s ease-in;
 }
 
-header .bottom-content {
+header.main  .bottom-content {
   font-size: 1.7em;
   text-align: center;
   position: absolute;
@@ -227,12 +227,12 @@ header .bottom-content {
   transition: all 0.2s ease-in;
 }
 
-header .bottom-content:hover {
+header.main  .bottom-content:hover {
   bottom: 4px;
   cursor: pointer;
 }
 
-header .content span {
+header.main  .content span {
   color: #2c3e50;
   padding: 5px 8px;
   font-weight: 400;
@@ -242,9 +242,29 @@ header .content span {
   background: white;
 }
 
-.auth nav, .auth footer {
+.auth nav, .auth footer, .auth #band {
   display: none;
   visibility: hidden;
+}
+
+.alert {
+  text-align: center;
+  width: 100%;
+  position: fixed;
+  z-index: 99;
+  top: 60px;
+  left: 0;
+}
+
+section {
+  padding: 40px 0;
+}
+
+section h2 {
+  color: #2c3e50;
+  font-variant: small-caps;
+  text-transform: lowercase;
+  margin-bottom: 20px;
 }
 
 body.auth {
@@ -257,6 +277,39 @@ body.auth {
   background-size: cover;
   background-attachment: fixed;
 }
+
+#band {
+  background-image: url('../img/header.jpg');
+  background-position: 0% 70%;
+  /* background-size: cover; */
+  width: 100%;
+  height: 10vh;
+  max-height: 400px;
+  min-height: 150px;
+  color: white;
+  font-weight: thin;
+  font-variant: small-caps;
+  text-transform: lowercase;
+  text-align: center;
+  display: flex;
+  align-items: center;
+}
+
+#band h1 {
+  color: white;
+  font-size: 2.9em;
+  letter-spacing: 0.7em;
+  margin: 0;
+  display: block;
+  width: 100%;
+}
+
+@media (max-width: 768px) {
+  #band h1 {
+    letter-spacing: normal;
+  }
+}
+
 
 .full {
   width: 100%;
@@ -288,7 +341,7 @@ body.auth {
   padding-top: 10px;
 }
 
-.bloc-form .input-group-addon {
+.input-group-addon {
   background: white;
   color: #395682;
 }
@@ -304,7 +357,7 @@ body.auth {
   border-color: #395682;
 }
 
-header .wrapper {
+header.main  .wrapper {
   position: absolute;
   top: 60px;
   left: 0;
@@ -317,7 +370,7 @@ header .wrapper {
   background-size: cover;
 }
 
-header .dark {
+header.main  .dark {
   position: absolute;
   top: 60px;
   left: 0;
@@ -329,23 +382,23 @@ header .dark {
   border-bottom: 4px solid #395682;
 }
 
-header .action a {
+header.main  .action a {
   color: white;
   text-transform: lowercase;
   font-variant: small-caps;
   border-bottom: 1px solid transparent;
 }
 
-header .action {
+header.main  .action {
   margin-top: 10px;
 }
 
-header .action a:hover {
+header.main  .action a:hover {
   border-bottom: 1px solid white;
 }
 
 @media (max-width: 768px) {
-  header .dark {
+  header.main  .dark {
     background: rgba(0, 0, 0, 0.3);
   }
 }
