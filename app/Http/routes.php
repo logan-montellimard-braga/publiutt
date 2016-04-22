@@ -35,8 +35,8 @@ Route::get('/publications/edit/{publication}', ['as' => 'publications_edit', 'mi
 Route::post('/publications', ['middleware' => 'auth', 'uses' => 'PublicationController@store']);
 Route::delete('/publications/{publication}', ['middleware' => 'auth', 'uses' => 'PublicationController@destroy']);
 
-Route::get('/search', 'PublicationController@search');
-Route::get('/search/results', 'PublicationController@find');
+Route::get('/search', 'SearchController@index');
+Route::get('/search/results', 'SearchController@find');
 
 Route::auth();
 

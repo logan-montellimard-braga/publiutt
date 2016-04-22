@@ -6,9 +6,10 @@
   <div class="container">
     <div class="row">
       <div class="col-md-8 col-md-offset-2">
+        <a href="{{ url('/publications') }}"><i class="fa fa-angle-left"></i>&nbsp;Retour aux publications</a>
         <h2>Ajouter une publication</h2>
 
-        <form action="{{ url('/publications') }}" method="POST" role="form">
+        <form id="add" action="{{ url('/publications') }}" method="POST" role="form" enctype="multipart/form-data">
           {!! csrf_field() !!}
 
           <div class="form-group{{ $errors->has('titre') ? ' has-error' : '' }}">
@@ -53,12 +54,31 @@
             @endif
           </div>
 
+          <div class="form-group{{ $errors->has('categorie') ? ' has-error' : '' }}">
+            <div class="input-group input-group-lg">
+              <div class="input-group-addon">
+                <i class="fa fa-fw fa-folder-open"></i>
+              </div>
+              <select required class="form-control" name="categorie">
+                <option selected disabled>Cat&eacute;gorie de la publication</option>
+                @foreach ($categories as $categorie)
+                  <option value="{{ $categorie->id }}">{{ $categorie->nom }}</option>
+                @endforeach
+              </select>
+            </div>
+            @if ($errors->has('categorie'))
+            <span class="help-block">
+              <strong>{{ $errors->first('categorie') }}</strong>
+            </span>
+            @endif
+          </div>
+
           <div class="form-group{{ $errors->has('statut') ? ' has-error' : '' }}">
             <div class="input-group input-group-lg">
               <div class="input-group-addon">
                 <i class="fa fa-fw fa-flag"></i>
               </div>
-              <select class="form-control" name="statut">
+              <select required class="form-control" name="statut">
                 <option selected disabled>Statut de la publication</option>
                 @foreach ($statuts as $statut)
                   <option value="{{ $statut->id }}">{{ $statut->nom }}</option>
@@ -84,6 +104,30 @@
             @if ($errors->has('document'))
             <span class="help-block">
               <strong>{{ $errors->first('document') }}</strong>
+            </span>
+            @endif
+          </div>
+
+          <input type="hidden" id="auteurs" name="auteurs" />
+
+          <div class="form-group{{ $errors->has('auteurs') ? ' has-error' : '' }}">
+            <div class="input-group input-group-lg">
+              <div class="input-group-addon">
+                <i class="fa fa-fw fa-users"></i>
+              </div>
+              <select id="auteurs_ms" multiple rows="10" class="form-control" name="auteurs_ms[]">
+                @foreach ($organisations as $organisation)
+                  @foreach ($organisation->equipes as $equipe)
+                    @foreach ($equipe->auteurs as $auteur)
+                      <option value="{{ $auteur->id }}">{{ strtoupper($auteur->nom) }} {{ $auteur->prenom }} - {{ $equipe->nom }}</option>
+                    @endforeach
+                  @endforeach
+                @endforeach
+              </select>
+            </div>
+            @if ($errors->has('auteurs'))
+            <span class="help-block">
+              <strong>{{ $errors->first('auteurs') }}</strong>
             </span>
             @endif
           </div>
@@ -123,6 +167,25 @@
 
   <script>
   window.jqReady = function() {
+    $('#auteurs_ms').multiSelect({
+        keepOrder: true,
+        selectableHeader: "<div class='ms-header'>Auteurs disponibles</div>",
+        selectionHeader: "<div class='ms-header'>Auteurs de la publication</div>",
+    });
+
+    $('#add').submit(function() {
+        var selections = [];
+        var sels = $('#ms-auteurs_ms .ms-selection .ms-list li:visible');
+        $.each(sels, function(i, el) {
+          var str = $(el).find('span').text();
+          var opt = $('form option:contains("' + str + '")');
+          $.each(opt, function(j, ell) {
+            selections.push($(ell).attr('value'));
+          });
+        });
+        $('#auteurs').val(selections);
+    })
+
     $('#lieu').hide();
     $('#file_select').change(function() {
         var name = $('#file_select').val().split('\\');

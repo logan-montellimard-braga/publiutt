@@ -13,4 +13,15 @@ class Categorie extends Model
     {
         return $this->hasMany(Publication::class);
     }
+
+    public function initials()
+    {
+        $str = $this->nom;
+        $expr = '/(?<=\s|^)[a-z]/i';
+        preg_match_all($expr, $str, $matches);
+        $result = implode('', $matches[0]);
+        $result = strtoupper($result);
+
+        return $result;
+    }
 }

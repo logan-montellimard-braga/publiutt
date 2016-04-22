@@ -485,6 +485,23 @@ footer a:hover {
 .publication {
   border-left: 4px solid #395682;
   padding-left: 10px;
+  overflow: hidden;
+}
+
+.publication h4 {
+  margin-top: 0;
+}
+
+.publication h4 a {
+  color: #2C3E50;
+}
+
+.publication .authors a {
+  color: white;
+}
+
+.publication .authors a:hover {
+  border-bottom: 2px solid #f9f9f9;
 }
 
 .publication .date {
@@ -558,6 +575,26 @@ table tr.active th {
   background: white;
   cursor: inherit;
   display: block;
+}
+
+.ms-elem-selectable span {
+  text-align: right;
+}
+
+.ms-header {
+  border: 1px solid #ccc;
+  border-bottom: none;
+  padding: 5px;
+  /* background: #395682; */
+  color: #395682;
+  text-align: center;
+  font-variant: small-caps;
+  text-transform: uppercase;
+  font-size: 0.9em;
+}
+
+.panel hr {
+  border-color: #ddd;
 }
 
 
@@ -957,3 +994,85 @@ input[type="checkbox"] .styled:checked + label::after,
 input[type="radio"] .styled:checked + label::after {
   color: #fff; }
 
+
+.ms-container{
+  /* width: 370px; */
+}
+
+.ms-container:after{
+  content: ".";
+  display: block;
+  height: 0;
+  line-height: 0;
+  font-size: 0;
+  clear: both;
+  min-height: 0;
+  visibility: hidden;
+}
+
+.ms-container .ms-selectable, .ms-container .ms-selection{
+  background: #fff;
+  color: #555555;
+  float: left;
+  width: 48%;
+}
+.ms-container .ms-selection{
+  float: right;
+}
+
+.ms-container .ms-list{
+  -webkit-transition: border linear 0.2s, box-shadow linear 0.2s;
+  -moz-transition: border linear 0.2s, box-shadow linear 0.2s;
+  -ms-transition: border linear 0.2s, box-shadow linear 0.2s;
+  -o-transition: border linear 0.2s, box-shadow linear 0.2s;
+  transition: border linear 0.2s, box-shadow linear 0.2s;
+  border: 1px solid #ccc;
+  position: relative;
+  height: 200px;
+  padding: 0;
+  overflow-y: auto;
+}
+
+.ms-container .ms-list.ms-focus{
+  outline: none;
+}
+
+.ms-container ul{
+  margin: 0;
+  list-style-type: none;
+  padding: 0;
+}
+
+.ms-container .ms-optgroup-container{
+  width: 100%;
+}
+
+.ms-container .ms-optgroup-label{
+  margin: 0;
+  padding: 5px 0px 0px 5px;
+  cursor: pointer;
+  color: #999;
+}
+
+.ms-container .ms-selectable li.ms-elem-selectable,
+.ms-container .ms-selection li.ms-elem-selection{
+  border-bottom: 1px #eee solid;
+  padding: 2px 10px;
+  color: #555;
+  font-size: 14px;
+}
+
+.ms-container .ms-selectable li.ms-hover,
+.ms-container .ms-selection li.ms-hover{
+  cursor: pointer;
+  color: #fff;
+  text-decoration: none;
+  background-color: #395682;
+}
+
+.ms-container .ms-selectable li.disabled,
+.ms-container .ms-selection li.disabled{
+  background-color: #eee;
+  color: #aaa;
+  cursor: text;
+}

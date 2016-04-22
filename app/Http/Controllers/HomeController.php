@@ -24,9 +24,11 @@ class HomeController extends Controller
     {
         $categories = Categorie::all();
         $organisation = Organisation::where('etablissement', 'Université de Technologie de Troyes')->get();
+        $publications = Publication::orderBy('created_at', 'desc')->limit(3)->get();
         return view('welcome', [
             'categories' => $categories,
             'organisation' => $organisation[0],
+            'publications' => $publications,
         ]);
     }
 }

@@ -39,6 +39,17 @@
                     @endif
                   </div>
 
+                  <div class="form-group">
+                    <div class="input-group input-group-lg">
+                      <div class="checkbox checkbox-primary">
+                        <input name="remember" id="remember" class="styled" type="checkbox" checked>
+                        <label for="remember">
+                          Se souvenir de moi
+                        </label>
+                      </div>
+                    </div>
+                  </div>
+
                   <div class="form-group text-right">
                     <button type="submit" class="up-small btn btn-lg btn-theme">Connexion</button>
                   </div>

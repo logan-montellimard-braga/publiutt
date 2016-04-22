@@ -97,7 +97,7 @@
                     <div class="form-group{{ $errors->has('equipe') ? ' has-error' : '' }}">
                       <div class="input-group input-group-lg">
                         <div class="input-group-addon">
-                          <i class="fa fa-fw fa-users"></i>
+                          <i class="fa fa-fw fa-flask"></i>
                         </div>
                         <select class="form-control" name="equipe">
                           <option selected disabled>&Eacute;quipe de recherche</option>

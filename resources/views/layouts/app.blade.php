@@ -55,7 +55,7 @@
             <form class="navbar-form navbar-left" role="search" action="{{ url('/search/results') }}" method="GET">
               {!! csrf_field() !!}
               <div class="form-group">
-                <input type="text" class="form-control" placeholder="Chercher un article...">
+                <input type="text" class="form-control" placeholder="Rechercher...">
               </div>
               <button type="submit" class="btn btn-theme"><i class="fa fa-search"></i></button>
             </form>
@@ -149,6 +149,7 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
   <script>window.jQuery || document.write("<script src=\"{{ asset('js/vendor/jquery-1.11.2.min.js') }}\"><\/script>")</script>
   <script src="{{ asset('js/vendor/bootstrap.min.js') }}"></script>
+  <script src="{{ asset('js/vendor/jquery.multi-select.js') }}"></script>
   <script src="{{ asset('js/main.js') }}"></script>
 </body>
 </html>

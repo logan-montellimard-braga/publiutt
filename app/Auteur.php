@@ -16,6 +16,11 @@ class Auteur extends Model
         return $this->belongsTo(Equipe::class);
     }
 
+    public function organisation()
+    {
+        return $this->equipe->organisation();
+    }
+
     public function user()
     {
         return $this->hasOne(User::class);
@@ -23,6 +28,6 @@ class Auteur extends Model
 
     public function publications()
     {
-        return $this->belongsToMany(Publication::class);
+        return $this->belongsToMany(Publication::class)->withPivot('ordre');
     }
 }

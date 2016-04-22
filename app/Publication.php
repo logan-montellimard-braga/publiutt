@@ -23,6 +23,6 @@ class Publication extends Model
 
     public function auteurs()
     {
-        return $this->belongsToMany(Auteur::class);
+        return $this->belongsToMany(Auteur::class)->withPivot('ordre');
     }
 }

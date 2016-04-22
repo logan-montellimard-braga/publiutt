@@ -45,6 +45,19 @@
           <p class="clearfix"></p>
 
           <ul class="publications">
+            @foreach($publications as $publication)
+              <li>
+                <div class="publication">
+                  <h4><a href="{{ url('/publications/show/'.$publication->id) }}">{{ $publication->titre }} ({{ $publication->categorie->initials() }})</a></h4>
+                  <h6>{{ $publication->reference }}, <span class="date">{{ date('Y', strtotime($publication->annee)) }}</span></h6>
+                  <ul class="authors">
+                    @foreach ($publication->auteurs()->withPivot('ordre')->orderBy('ordre')->get() as $auteur)
+                      <li><a href="{{ url('/auteurs/show/'.$auteur->id) }}">{{ $auteur->prenom }} {{ $auteur->nom }}</a></li>
+                    @endforeach
+                  </ul>
+                </div>
+              </li>
+            @endforeach
           </ul>
 
           <p class="text-right">
