@@ -17,7 +17,7 @@ class CreatePublicationTable extends Migration
             $table->string('titre');
             $table->string('reference');
             $table->date('annee');
-            $table->string('lieu');
+            $table->string('lieu')->nullable();
             $table->string('document');
             $table->integer('statut_id')->index();
             $table->integer('categorie_id')->index();

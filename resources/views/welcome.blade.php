@@ -21,7 +21,7 @@
             @if (Auth::guest())
               <a href="{{ url('/login') }}"><i class="fa fa-angle-right"></i>&nbsp;Je suis chercheur &agrave; l'UTT</a>
             @else
-              <a href=""><i class="fa fa-angle-right"></i>&nbsp;J'ajoute une publication</a>
+            <a href="{{ url('/publications/new') }}"><i class="fa fa-angle-right"></i>&nbsp;J'ajoute une publication</a>
             @endif
           </div>
         </div>
@@ -35,4 +35,67 @@
       </div>
     </div>
   </header>
+
+  <section>
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-8 col-md-7 col-md-offset-1">
+          <h2>Derni&egrave;res publications</h2>
+
+          <p class="clearfix"></p>
+
+          <ul class="publications">
+          </ul>
+
+          <p class="text-right">
+            <a href="{{ url('/publications') }}"><i class="fa fa-plus"></i>&nbsp;Voir toutes les publications</a>
+          </p>
+
+          <hr class="hidden-xs">
+
+          <h3>Rechercher dans la base</h3>
+
+          <p class="clearfix"></p>
+
+          <form class="" action="{{ url('/search/results') }}" method="GET" role="form">
+            {!! csrf_field() !!}
+            <div class="form-group">
+              <div class="input-group input-group-lg">
+                <input type="text" class="form-control input-lg" placeholder="Rechercher une publication, un auteur, ...">
+                <span class="input-group-btn">
+                  <button type="submit" class="btn btn-lg btn-theme"><i class="fa fa-search"></i></button>
+                </span>
+              </div>
+            </div>
+          </form>
+
+          <p class="text-right">
+            <a href="{{ url('/search') }}"><i class="fa fa-search-plus"></i>&nbsp;Effectuer une recherche avanc&eacute;e</a>
+          </p>
+
+        </div>
+
+
+        <div class="col-sm-4 col-md-3">
+          <hr class="visible-xs">
+          <h3>Cat&eacute;gories</h3>
+          <ul>
+            @foreach ($categories as $categorie)
+              <li><a href="#">{{ $categorie->nom }}</a></li>
+            @endforeach
+          </ul>
+          <div class="clearfix"></div>
+          <hr class="hidden-xs">
+          <h3>&Eacute;quipes UTT-<abbr title="Institut Charles Delaunay">ICD</abbr></h3>
+          <ul>
+            @foreach ($organisation->equipes as $equipe)
+              <li><a href="{{ url('/equipes/show/'.$equipe->id) }}">{{ $equipe->nom }}</a></li>
+            @endforeach
+          </ul>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
 @endsection

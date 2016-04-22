@@ -52,7 +52,8 @@
           </div>
 
           <div class="nav navbar-nav hidden-xs hidden-sm">
-            <form class="navbar-form navbar-left" role="search">
+            <form class="navbar-form navbar-left" role="search" action="{{ url('/search/results') }}" method="GET">
+              {!! csrf_field() !!}
               <div class="form-group">
                 <input type="text" class="form-control" placeholder="Chercher un article...">
               </div>
@@ -63,7 +64,7 @@
           <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav navbar-right">
               <li class="{{ Route::getCurrentRoute()->getName() === 'root' ? 'active' : '' }}"><a href="{{ url('/') }}">Accueil</a></li>
-              <li><a href="#">Publications</a></li>
+              <li class="{{ 0 === strpos(Route::getCurrentRoute()->getName(), 'publications') ? 'active' : '' }}"><a href="{{ url('/publications') }}">Publications</a></li>
               @if (Auth::guest())
                 <li class="dropdown">
                   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Espace membre&nbsp;<i class="fa fa-angle-down"></i></span></a>
@@ -73,7 +74,17 @@
                   </ul>
                 </li>
               @else
-                <li><a href="{{ url('/logout') }}">D&eacute;connexion</a></li>
+                <li class="dropdown">
+                  @if (Auth::user()->auteur != null)
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{ Auth::user()->auteur->prenom }} {{ Auth::user()->auteur->nom }}&nbsp;<i class="fa fa-angle-down"></i></span></a>
+                  @else
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{ Auth::user()->email }}&nbsp;<i class="fa fa-angle-down"></i></span></a>
+                  @endif
+                  <ul class="dropdown-menu">
+                    <li class="{{ Route::getCurrentRoute()->getName() === 'dashboard' ? 'active' : '' }}"><a href="{{ url('/dashboard') }}">Tableau de bord</a></li>
+                    <li><a href="{{ url('/logout') }}">D&eacute;connexion</a></li>
+                  </ul>
+                </li>
               @endif
             </ul>
           </div>
@@ -91,7 +102,7 @@
   @if(Session::has('flash_message_error'))
     <div class="alert alert-danger alert-dismissible">
        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-      <span class="fa fa-times"></span>&nbsp;{!! session('flash_message_error') !!}
+      <span class="fa fa-exclamation-triangle"></span>&nbsp;{!! session('flash_message_error') !!}
     </div>
   @endif
 

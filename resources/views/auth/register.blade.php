@@ -72,7 +72,7 @@
                     <div class="form-group{{ $errors->has('prenom') ? ' has-error' : '' }}">
                       <div class="input-group input-group-lg">
                         <div class="input-group-addon">
-                          <i class="fa fa-fw fa-tag"></i>
+                          <i class="fa fa-fw fa-tags"></i>
                         </div>
                         <input required type="text" name="prenom" value="{{ old('prenom') }}" class="form-control input-lg" placeholder="Prénom...">
                       </div>

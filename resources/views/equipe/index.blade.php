@@ -21,7 +21,7 @@
                   <tbody>
                     @foreach ($organisations as $organisation)
                       <tr class="active">
-                        <th colspan="3"><strong>{{ $organisation->nom }} ({{ $organisation->etablissement }})</strong></th>
+                        <th colspan="4"><strong>{{ $organisation->nom }} ({{ $organisation->etablissement }})</strong></th>
                       </tr>
                       @foreach ($organisation->equipes as $equipe)
                         <tr>

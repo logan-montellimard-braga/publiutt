@@ -1,4 +1,6 @@
 (function($) {
+  if (window.hasOwnProperty('jqReady')) $(function() {window.jqReady();});
+
   $(document).ready(function() {
     $('body').css('overflow-y', 'scroll');
     $('#loader').remove();
