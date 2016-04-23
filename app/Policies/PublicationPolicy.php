@@ -32,8 +32,8 @@ class PublicationPolicy
 
     protected function isAuteur(User $user, Publication $publication)
     {
-        foreach ($publication->auteurs as $auteurs) {
-            if ($user->auteur_id === $auteur->id) return true;
+        foreach ($publication->auteurs as $auteur) {
+            if ($user->auteur_id == $auteur->id) return true;
         }
         return false;
     }

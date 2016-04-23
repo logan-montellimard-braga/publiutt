@@ -256,6 +256,12 @@ header.main  .content span {
   visibility: hidden;
 }
 
+.error-page h1, .error-page h3 {
+  font-variant: small-caps;
+  text-transform: uppercase;
+  color: white;
+}
+
 .alert {
   text-align: center;
   width: 100%;
@@ -353,6 +359,13 @@ body.auth {
   padding: 40px;
   padding-top: 10px;
 }
+
+.error-page .bloc-form {
+  background: rgba(30, 30, 30, 0.5);
+  border: none;
+  padding: 40px;
+}
+
 
 .input-group-addon {
   background: white;

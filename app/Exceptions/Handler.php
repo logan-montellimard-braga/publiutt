@@ -45,6 +45,10 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Exception $e)
     {
+        if ($e instanceof AuthorizationException) {
+            \Session::flash('flash_message_error', "Vous n'êtes pas autorisé à réaliser cette action.");
+            return redirect('/');
+        }
         return parent::render($request, $e);
     }
 }

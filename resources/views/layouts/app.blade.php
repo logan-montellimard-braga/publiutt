@@ -21,7 +21,7 @@
 
   <script src="{{ asset('js/vendor/modernizr-2.8.3-respond-1.4.2.min.js') }}"></script>
 </head>
-<body class="{{ strpos(Route::getCurrentRoute()->getActionName(), 'Auth') ? 'auth' : '' }}">
+<body class="@yield('body-class')">
   <!--[if lt IE 9]>
     <div class="browserupgrade alert alert-danger alert-dismissible">
       <button type="button" class="close" data-dismiss="alert" aria-label="Fermer"><span aria-hidden="true">&times;</span></button>

@@ -32,6 +32,7 @@ Route::get('/publications', ['as' => 'publications', 'uses' => 'PublicationContr
 Route::get('/publications/show/{publication}', ['as' => 'publications_show', 'uses' => 'PublicationController@show']);
 Route::get('/publications/new', ['as' => 'publications_new', 'middleware' => 'auth', 'uses' => 'PublicationController@create']);
 Route::get('/publications/edit/{publication}', ['as' => 'publications_edit', 'middleware' => 'auth', 'uses' => 'PublicationController@edit']);
+Route::patch('/publications/edit/{publication}', ['middleware' => 'auth', 'uses' => 'PublicationController@update']);
 Route::post('/publications', ['middleware' => 'auth', 'uses' => 'PublicationController@store']);
 Route::delete('/publications/{publication}', ['middleware' => 'auth', 'uses' => 'PublicationController@destroy']);
 

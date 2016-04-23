@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
 @section('title', 'Connexion')
+@section('body-class', 'auth')
 
 @section('content')
 <section class="background full flex-center">
