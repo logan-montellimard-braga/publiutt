@@ -15,18 +15,18 @@ Route::get('/', ['as' => 'root', 'uses' => 'HomeController@welcome']);
 
 Route::get('/organisations', 'OrganisationController@index');
 Route::get('/organisations/show/{organisation}', 'OrganisationController@show');
-Route::post('/organisations', 'OrganisationController@store');
-Route::delete('/organisations/{organisation}', 'OrganisationController@destroy');
+Route::post('/organisations', ['uses' => 'OrganisationController@store', 'middleware' => 'auth']);
+Route::delete('/organisations/{organisation}', ['uses' => 'OrganisationController@destroy', 'middleware' => 'auth']);
 
 Route::get('/equipes', 'EquipeController@index');
 Route::get('/equipes/show/{equipe}', 'EquipeController@show');
-Route::post('/equipes', 'EquipeController@store');
-Route::delete('/equipes/{equipe}', 'EquipeController@destroy');
+Route::post('/equipes', ['uses' => 'EquipeController@store', 'middleware' => 'auth']);
+Route::delete('/equipes/{equipe}', ['uses' => 'EquipeController@destroy', 'middleware' => 'auth']);
 
 Route::get('/auteurs', 'AuteurController@index');
 Route::get('/auteurs/show/{auteur}', 'AuteurController@show');
-Route::post('/auteurs', 'AuteurController@store');
-Route::delete('/auteurs/{auteur}', 'AuteurController@destroy');
+Route::post('/auteurs', ['uses' => 'AuteurController@store', 'middleware' => 'auth']);
+Route::delete('/auteurs/{auteur}', ['uses' => 'AuteurController@destroy', 'middleware' => 'auth']);
 
 Route::get('/publications', ['as' => 'publications', 'uses' => 'PublicationController@index']);
 Route::get('/publications/show/{publication}', ['as' => 'publications_show', 'uses' => 'PublicationController@show']);
@@ -42,3 +42,4 @@ Route::get('/search/results', 'SearchController@find');
 Route::auth();
 
 Route::get('/dashboard', ['as' => 'dashboard', 'middleware' => 'auth', 'uses' => 'HomeController@index']);
+Route::get('/profil', ['as' => 'profil', 'middleware' => 'auth', 'uses' => 'HomeController@profile']);

@@ -115,7 +115,7 @@ section a {
   transition: all 0.1s;
 }
 
-section a:hover {
+section a:hover, section a:focus {
   border-bottom: 2px solid #2C3E50;
   color: #3C3E50;
 }
@@ -128,7 +128,7 @@ ul li {
   list-style: none;
 }
 
-a:hover {
+a:hover, a:focus {
   text-decoration: none;
 }
 
@@ -419,7 +419,7 @@ header.main  .action {
   margin-top: 10px;
 }
 
-header.main  .action a:hover {
+header.main  .action a:hover, header.main .action a:focus {
   border-bottom: 1px solid white;
 }
 
@@ -487,7 +487,7 @@ footer .bottom a.author {
   font-weight: 600;
 }
 
-footer a:hover {
+footer a:hover, footer a:focus {
   color: #707070;
 }
 
@@ -501,8 +501,19 @@ footer a:hover {
   overflow: hidden;
 }
 
+.publication-in {
+  border: none;
+  padding: 0;
+}
+
 .publication h4 {
   margin-top: 0;
+}
+
+.badge {
+  background: #B49262;
+  border-radius: 0px;
+  font-size: 0.7em;
 }
 
 .publication h4 a {
@@ -513,7 +524,7 @@ footer a:hover {
   color: white;
 }
 
-.publication .authors a:hover {
+.publication .authors a:hover, .publication .authors a:focus {
   border-bottom: 2px solid #f9f9f9;
 }
 
@@ -608,6 +619,31 @@ table tr.active th {
 
 .panel hr {
   border-color: #ddd;
+}
+
+ul.intact li {
+  padding-left: 15px;
+  list-style-type: square;
+  list-style-position: inside;
+}
+
+.nav-tabs a:hover {
+  border-bottom: none;
+}
+
+.pagination li > a:hover {
+  border-bottom: 1px solid #ddd;
+  background-color: white;
+}
+
+.pagination > li > a {
+  color: #B49262;
+}
+
+.pagination>.active>a, .pagination>.active>span, .pagination>.active>a:hover, .pagination>.active>span:hover, .pagination>.active>a:focus, .pagination>.active>span:focus {
+  border-color: #395682;
+  background: #395682;
+  font-weight: bold;
 }
 
 

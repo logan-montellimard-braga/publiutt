@@ -7,24 +7,41 @@ use Illuminate\Http\Request;
 use App\Publication;
 use App\Categorie;
 use App\Organisation;
+use App\Auteur;
+use App\User;
+use App\Http\Controllers\AuteurController;
 
 class HomeController extends Controller
 {
-    /**
-     * Show the application dashboard.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
-        return view('home');
+        return view('home', [
+            'auteurs_perf' => Auteur::byPerformance(),
+            'publications' => Publication::all(),
+            'publications_ext' => Publication::noAuteurUTT(),
+            'doublons' => Publication::doublons(),
+            'doublons_auteurs' => Publication::doublons_auteurs(),
+            'comptes' => User::all(),
+            'auteurs_doublons' => Auteur::doublons(),
+        ]);
+    }
+
+    public function profile()
+    {
+        return view('auteur.show', [
+            'auteur' => \Auth::user()->auteur,
+            'coauteurs' => \Auth::user()->auteur->coauteurs(),
+            'firstPub' => \Auth::user()->auteur->firstPublicationYear(),
+            'lastPub' => \Auth::user()->auteur->lastPublicationYear(),
+        ]);
     }
 
     public function welcome()
     {
         $categories = Categorie::all();
-        $organisation = Organisation::where('etablissement', 'Université de Technologie de Troyes')->get();
-        $publications = Publication::orderBy('created_at', 'desc')->limit(3)->get();
+        $organisation = Organisation::UTT();
+        $publications = Publication::orderBy('annee', 'desc')->limit(3)->get();
+
         return view('welcome', [
             'categories' => $categories,
             'organisation' => $organisation[0],

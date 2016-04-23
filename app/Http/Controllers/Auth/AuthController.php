@@ -87,12 +87,8 @@ class AuthController extends Controller
             return view($this->registerView);
         }
 
-        $etablissement = 'Université de Technologie de Troyes';
-
         $data = array();
-        $organisation = Organisation::where('etablissement', $etablissement)
-                                    ->take(1)
-                                    ->get();
+        $organisation = Organisation::UTT();
         $equipes = array();
         foreach ($organisation as $org) {
             $equipes = array_merge($equipes, $org->equipes()->get()->all());

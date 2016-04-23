@@ -13,7 +13,7 @@
                       <th>&Eacute;quipe</th>
                       <th>Description</th>
                       <th>Auteurs</th>
-                      @if (Auth::user()->is_admin)
+                      @if (Auth::user() && Auth::user()->is_admin)
                         <th></th>
                       @endif
                     </tr>
@@ -21,14 +21,14 @@
                   <tbody>
                     @foreach ($organisations as $organisation)
                       <tr class="active">
-                        <th colspan="4"><strong>{{ $organisation->nom }} ({{ $organisation->etablissement }})</strong></th>
+                        <th colspan="4"><a href="{{ url('/organisations/show/'.$organisation->id) }}"><strong>{{ $organisation->nom }} ({{ $organisation->etablissement }})</strong></a></th>
                       </tr>
                       @foreach ($organisation->equipes as $equipe)
                         <tr>
-                          <td>{{ $equipe->nom }}</td>
+                          <td><a href="{{ url('/equipes/show/'.$equipe->id) }}">{{ $equipe->nom }}</a></td>
                           <td>{{ $equipe->description }}</td>
                           <td>{{ count($equipe->auteurs) }}</td>
-                          @if (Auth::user()->is_admin)
+                          @if (Auth::user() && Auth::user()->is_admin)
                           <td class="text-right">
                             <form action="{{ url('equipes/'.$equipe->id) }}" method="POST">
                               {!! csrf_field() !!}
@@ -44,7 +44,7 @@
                       @endforeach
                       @if (count($organisation->equipes) === 0)
                         <tr>
-                          <td colspan="2">Pas d'&eacute;quipes pour cette organisation</td>
+                          <td colspan="4">Pas d'&eacute;quipes pour cette organisation</td>
                         </tr>
                       @endif
                     @endforeach
@@ -54,6 +54,7 @@
             </div>
           </div>
 
+          @if (Auth::user())
           <div class="row" id="add">
             <div class="col-md-8 col-md-offset-2">
               <h2>Ajouter une &eacute;quipe</h2>
@@ -117,6 +118,7 @@
             </div>
           </div>
         </div>
+        @endif
     </section>
 @endsection
 

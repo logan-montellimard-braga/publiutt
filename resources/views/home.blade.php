@@ -20,7 +20,7 @@
           </div>
           <div class="panel-body">
             <p>
-              Vous recherchez avec l'&eacute;quipe <b>{{ Auth::user()->auteur->equipe->nom }}</b> de l'organisation <b>{{ Auth::user()->auteur->organisation->nom }}</b> ({{ Auth::user()->auteur->organisation->etablissement }})</p>
+              Vous recherchez avec l'&eacute;quipe <b><a href="{{ url('/equipes/show/'.Auth::user()->auteur->equipe->id) }}"><abbr title="{{ Auth::user()->auteur->equipe->description }}">{{ Auth::user()->auteur->equipe->nom }}</abbr></a></b> de l'organisation <b><a href="{{ url('/organisations/show/'.Auth::user()->auteur->organisation->id) }}">{{ Auth::user()->auteur->organisation->nom }}</a></b> ({{ Auth::user()->auteur->organisation->etablissement }}).</p>
             </p>
             @if (count(Auth::user()->auteur->publications) === 0)
               <p>Vous n'avez pas encore post&eacute; de publication.
@@ -31,7 +31,7 @@
               <p>Vous &ecirc;tes (co-)auteur de <b>{{ count(Auth::user()->auteur->publications) }}</b> publications.</p>
             @endif
             <p class="text-center">
-              <a class="btn btn-theme" href="{{ url('/auteurs/show/'.Auth::user()->auteur->id) }}">Consulter mon profil</a>
+              <a class="btn btn-theme" href="{{ url('/profil') }}">Consulter mon profil</a>
             </p>
           </div>
           <hr>
@@ -51,6 +51,12 @@
               </div>
             </div>
           </div>
+          @if (Auth::user()->is_admin)
+          <hr>
+          <div class="panel-body">
+            @include('admin')
+          </div>
+          @endif
         </div>
       </div>
     </div>

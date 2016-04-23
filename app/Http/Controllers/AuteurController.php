@@ -12,13 +12,23 @@ class AuteurController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth');
+        /* $this->middleware('auth'); */
     }
 
     public function index(Request $request)
     {
         $organisations = Organisation::orderBy('nom')->get();
         return view('auteur.index', ['organisations' => $organisations]);
+    }
+
+    public function show(Request $request, Auteur $auteur)
+    {
+        return view('auteur.show', [
+            'coauteurs' => $auteur->coauteurs(),
+            'auteur' => $auteur,
+            'firstPub' => $auteur->firstPublicationYear(),
+            'lastPub' => $auteur->lastPublicationYear(),
+        ]);
     }
 
     public function store(Request $request)

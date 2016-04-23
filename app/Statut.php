@@ -13,4 +13,19 @@ class Statut extends Model
     {
         return $this->hasMany(Publication::class);
     }
+
+    public static function publie()
+    {
+        return Statut::where('nom', 'Publié')->get()[0];
+    }
+
+    public static function revision()
+    {
+        return Statut::where('nom', 'En révision')->get()[0];
+    }
+
+    public static function soumis()
+    {
+        return Statut::where('nom', 'Soumis')->get()[0];
+    }
 }

@@ -17,33 +17,32 @@ class PublicationController extends Controller
 
     public function index(Request $request)
     {
-        $categories = Categorie::all();
-        $organisation = Organisation::where('etablissement', 'Université de Technologie de Troyes')->get();
-        $publications = Publication::orderBy('created_at', 'desc')->get();
+        $publications = Publication::orderBy('annee', 'desc')->orderBy('created_at', 'desc')->paginate(5);
 
         return view('publication.index', [
-            'categories' => $categories,
-            'organisation' => $organisation[0],
+            'categories' => Categorie::all(),
+            'organisation' => Organisation::UTT()[0],
             'publications' => $publications,
+            'statuts' => Statut::all(),
         ]);
     }
 
     public function show(Request $request, Publication $publication)
     {
-
+        return view('publication.show', [
+            'publication' => $publication,
+            'equipes' => $publication->equipes(),
+            'organisations' => $publication->organisations(),
+        ]);
     }
 
     public function create(Request $request)
     {
-        $categories = Categorie::all();
-        $equipes = Equipe::all();
-        $statuts = Statut::all();
-        $organisations = Organisation::all();
         return view('publication.new', [
-            'categories' => $categories,
-            'equipes' => $equipes,
-            'statuts' => $statuts,
-            'organisations' => $organisations,
+            'categories' => Categorie::all(),
+            'equipes' => Equipe::all(),
+            'statuts' => Statut::all(),
+            'organisations' => Organisation::all(),
         ]);
     }
 
@@ -113,6 +112,7 @@ class PublicationController extends Controller
             'categorie' => 'required|exists:categories,id',
             'document' => 'required',
             'lieu' => 'required_if:is_conference,true|min:2|max:255',
+            'auteurs' => 'required',
         ]);
 
         $filename = time() . rand(11111, 99999) . '.' . $request->file('document')->getClientOriginalExtension();
@@ -145,5 +145,12 @@ class PublicationController extends Controller
     public function destroy(Request $request, Publication $publication)
     {
         $this->authorize('destroy', $publication);
+
+        $publication->auteurs()->sync([]);
+        $publication->delete();
+
+        \Session::flash('flash_message', "Suppression de la publication effectuée avec succès.");
+
+        return redirect('/publications');
     }
 }

@@ -125,6 +125,7 @@
                 @endforeach
               </select>
             </div>
+            <a href="{{ url('/auteurs#add') }}"><i class="fa fa-angle-right"></i>&nbsp;Un des auteurs n'est pas encore enregistr&eacute; ?</a>
             @if ($errors->has('auteurs'))
             <span class="help-block">
               <strong>{{ $errors->first('auteurs') }}</strong>

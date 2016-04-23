@@ -12,13 +12,21 @@ class EquipeController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth');
+        /* $this->middleware('auth'); */
     }
 
     public function index(Request $request)
     {
         $organisations = Organisation::orderBy('nom')->get();
         return view('equipe.index', ['organisations' => $organisations]);
+    }
+
+    public function show(Request $request, Equipe $equipe)
+    {
+        return view('equipe.show', [
+            'equipe' => $equipe,
+            'linked_equipes' => $equipe->linked_equipes(),
+        ]);
     }
 
     public function store(Request $request)

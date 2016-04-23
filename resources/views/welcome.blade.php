@@ -47,15 +47,7 @@
           <ul class="publications">
             @foreach($publications as $publication)
               <li>
-                <div class="publication">
-                  <h4><a href="{{ url('/publications/show/'.$publication->id) }}">{{ $publication->titre }} ({{ $publication->categorie->initials() }})</a></h4>
-                  <h6>{{ $publication->reference }}, <span class="date">{{ date('Y', strtotime($publication->annee)) }}</span></h6>
-                  <ul class="authors">
-                    @foreach ($publication->auteurs()->withPivot('ordre')->orderBy('ordre')->get() as $auteur)
-                      <li><a href="{{ url('/auteurs/show/'.$auteur->id) }}">{{ $auteur->prenom }} {{ $auteur->nom }}</a></li>
-                    @endforeach
-                  </ul>
-                </div>
+                @include('publication.publication')
               </li>
             @endforeach
           </ul>
@@ -74,7 +66,7 @@
             {!! csrf_field() !!}
             <div class="form-group">
               <div class="input-group input-group-lg">
-                <input type="text" class="form-control input-lg" placeholder="Rechercher une publication, un auteur, ...">
+                <input required name="query" type="text" class="form-control input-lg" placeholder="Rechercher une publication, un auteur, ...">
                 <span class="input-group-btn">
                   <button type="submit" class="btn btn-lg btn-theme"><i class="fa fa-search"></i></button>
                 </span>
@@ -94,17 +86,19 @@
           <h3>Cat&eacute;gories</h3>
           <ul>
             @foreach ($categories as $categorie)
-              <li><a href="#">{{ $categorie->nom }}</a></li>
+              <li><a href="{{ url('/search/results/?categorie='.$categorie->id) }}">{{ $categorie->nom }}</a></li>
             @endforeach
           </ul>
-          <div class="clearfix"></div>
-          <hr class="hidden-xs">
-          <h3>&Eacute;quipes UTT-<abbr title="Institut Charles Delaunay">ICD</abbr></h3>
-          <ul>
-            @foreach ($organisation->equipes as $equipe)
-              <li><a href="{{ url('/equipes/show/'.$equipe->id) }}">{{ $equipe->nom }}</a></li>
-            @endforeach
-          </ul>
+          @if ($organisation)
+            <div class="clearfix"></div>
+            <hr class="hidden-xs">
+            <h3>&Eacute;quipes UTT-<abbr title="Institut Charles Delaunay">ICD</abbr></h3>
+            <ul>
+                @foreach ($organisation->equipes as $equipe)
+                <li><a href="{{ url('/equipes/show/'.$equipe->id) }}"><abbr title="{{ $equipe->description }}">{{ $equipe->nom }}</abbr></a></li>
+                @endforeach
+            </ul>
+          @endif
         </div>
       </div>
 

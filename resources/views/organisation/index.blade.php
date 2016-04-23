@@ -14,7 +14,7 @@
                       <th>&Eacute;tablissement</th>
                       <th>&Eacute;quipes</th>
                       <th>Auteurs</th>
-                      @if (Auth::user()->is_admin)
+                      @if (Auth::user() && Auth::user()->is_admin)
                         <th></th>
                       @endif
                     </tr>
@@ -22,11 +22,11 @@
                   <tbody>
                     @foreach ($organisations as $organisation)
                       <tr>
-                        <td>{{ $organisation->nom }}</td>
-                        <td>{{ $organisation->etablissement }}</td>
+                        <td><a href="{{ url('/organisations/show/'.$organisation->id) }}">{{ $organisation->nom }}</a></td>
+                        <td><a href="{{ url('/organisations/show/'.$organisation->id) }}">{{ $organisation->etablissement }}</a></td>
                         <td>{{ count($organisation->equipes) }}</td>
                         <td>{{ count($organisation->auteurs) }}</td>
-                        @if (Auth::user()->is_admin)
+                        @if (Auth::user() && Auth::user()->is_admin)
                           <td class="text-right">
                             <form action="{{ url('organisations/'.$organisation->id) }}" method="POST">
                               {!! csrf_field() !!}
@@ -46,6 +46,7 @@
             </div>
           </div>
 
+          @if (Auth::user())
           <div class="row" id="add">
             <div class="col-md-8 col-md-offset-2">
               <h2>Ajouter une organisation</h2>
@@ -87,6 +88,7 @@
             </div>
           </div>
         </div>
+        @endif
     </section>
 @endsection
 

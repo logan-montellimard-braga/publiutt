@@ -6,7 +6,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-  <title>Publi'UTT &middot; @yield('title')</title>
+  <title>PubliUTT &middot; @yield('title')</title>
   <meta name="description" content="">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="apple-touch-icon" href="apple-touch-icon.png">
@@ -55,7 +55,7 @@
             <form class="navbar-form navbar-left" role="search" action="{{ url('/search/results') }}" method="GET">
               {!! csrf_field() !!}
               <div class="form-group">
-                <input type="text" class="form-control" placeholder="Rechercher...">
+                <input required name="query" type="text" class="form-control" placeholder="Rechercher...">
               </div>
               <button type="submit" class="btn btn-theme"><i class="fa fa-search"></i></button>
             </form>
@@ -82,6 +82,7 @@
                   @endif
                   <ul class="dropdown-menu">
                     <li class="{{ Route::getCurrentRoute()->getName() === 'dashboard' ? 'active' : '' }}"><a href="{{ url('/dashboard') }}">Tableau de bord</a></li>
+                    <li class="{{ Route::getCurrentRoute()->getName() === 'profil' ? 'active' : '' }}"><a href="{{ url('/auteurs/show/'.Auth::user()->auteur->id) }}">Mon profil</a></li>
                     <li><a href="{{ url('/logout') }}">D&eacute;connexion</a></li>
                   </ul>
                 </li>

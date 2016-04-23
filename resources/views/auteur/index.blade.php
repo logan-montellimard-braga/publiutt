@@ -14,7 +14,7 @@
                       <th>Pr&eacute;nom</th>
                       <th>&Eacute;quipe</th>
                       <th>Publications</th>
-                      @if (Auth::user()->is_admin)
+                      @if (Auth::user() && Auth::user()->is_admin)
                         <th></th>
                       @endif
                     </tr>
@@ -22,16 +22,16 @@
                   <tbody>
                     @foreach ($organisations as $organisation)
                       <tr class="active">
-                        <th colspan="5"><strong>{{ $organisation->nom }} ({{ $organisation->etablissement }})</strong></th>
+                        <th colspan="5"><strong><a href="{{ url('/organisations/show/'.$organisation->id) }}">{{ $organisation->nom }} ({{ $organisation->etablissement }})</a></strong></th>
                       </tr>
                       @foreach ($organisation->equipes as $equipe)
                         @foreach ($equipe->auteurs as $auteur)
                           <tr>
-                            <td>{{ strtoupper($auteur->nom) }}</td>
-                            <td>{{ $auteur->prenom }}</td>
-                            <td>{{ $equipe->nom }}</td>
+                            <td><a href="{{ url('/auteurs/show/'.$auteur->id) }}">{{ strtoupper($auteur->nom) }}</a></td>
+                            <td><a href="{{ url('/auteurs/show/'.$auteur->id) }}">{{ $auteur->prenom }}</a></td>
+                            <td><a href="{{ url('/equipes/show/'.$equipe->id) }}">{{ $equipe->nom }}</a></td>
                             <td>{{ count($auteur->publications) }}</td>
-                            @if (Auth::user()->is_admin)
+                            @if (Auth::user() && Auth::user()->is_admin)
                             <td class="text-right">
                               <form action="{{ url('auteurs/'.$auteur->id) }}" method="POST">
                                 {!! csrf_field() !!}
@@ -46,6 +46,11 @@
                           </tr>
                         @endforeach
                       @endforeach
+                      @if (count($organisation->auteurs) === 0)
+                        <tr>
+                          <td colspan="5">Pas d'auteurs pour cette organisation</td>
+                        </tr>
+                      @endif
                     @endforeach
                   </tbody>
                 </table>
@@ -53,6 +58,7 @@
             </div>
           </div>
 
+          @if (Auth::user())
           <div class="row" id="add">
             <div class="col-md-8 col-md-offset-2">
               <h2>Ajouter un auteur</h2>
@@ -120,6 +126,7 @@
             </div>
           </div>
         </div>
+        @endif
     </section>
 @endsection
 

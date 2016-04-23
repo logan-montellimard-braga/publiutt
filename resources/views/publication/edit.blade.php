@@ -6,7 +6,22 @@
   <div class="container">
     <div class="row">
       <div class="col-md-8 col-md-offset-2">
-        <a href="{{ url('/publications/show/'.$pub->id) }}"><i class="fa fa-angle-left"></i>&nbsp;Retour &agrave; la publication</a>
+        <div class="row">
+          <div class="col-sm-6">
+            <a href="{{ url('/publications/show/'.$pub->id) }}"><i class="fa fa-angle-left"></i>&nbsp;Retour &agrave; la publication</a>
+          </div>
+          <p class="clearfix visible-xs"></p>
+          <div class="col-sm-6">
+            <form action="{{ url('publications/'.$pub->id) }}" method="POST" class="text-right">
+              {!! csrf_field() !!}
+              {!! method_field('DELETE') !!}
+
+              <button title="Supprimer" type="submit" class="btn btn-danger">
+                <i class="fa fa-btn fa-trash"></i>&nbsp;Supprimer<span class="hidden-xs"> la publication</span>
+              </button>
+            </form>
+          </div>
+        </div>
         <h2>Modifier la publication</h2>
 
         <form id="add" action="{{ url('/publications/edit/'.$pub->id) }}" method="POST" role="form" enctype="multipart/form-data">
@@ -134,6 +149,7 @@
                 @endforeach
               </select>
             </div>
+            <a href="{{ url('/auteurs#add') }}"><i class="fa fa-angle-right"></i>&nbsp;Un des auteurs n'est pas encore enregistr&eacute; ?</a>
             @if ($errors->has('auteurs'))
             <span class="help-block">
               <strong>{{ $errors->first('auteurs') }}</strong>

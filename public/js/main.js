@@ -6,6 +6,8 @@
     $('#loader').remove();
   });
 
+  $('abbr, .tooltip-on').tooltip({ placement: 'top' });
+
   $('.to-content').click(function(e){
     e.preventDefault();
     $('html, body').animate({
