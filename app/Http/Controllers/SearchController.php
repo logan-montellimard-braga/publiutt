@@ -83,6 +83,7 @@ class SearchController extends Controller
             'publications' => $publications,
             'auteurs' => $auteurs,
             'categories' => $categories,
+            'query_v' => $request->query_v,
         ]);
     }
 }

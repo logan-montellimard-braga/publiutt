@@ -21,7 +21,7 @@
               <p class="clearfix">
             @endforeach
           @else
-            <p>Pas de publications trouv&eacute;es pour la requ&ecirc;te.</p>
+            <p>Pas de publications trouv&eacute;es pour la requ&ecirc;te '{{ $query_v }}'.</p>
           @endif
         @endif
 
@@ -72,7 +72,7 @@
               @endforeach
             </ul>
           @else
-            <p>Pas d'auteurs trouv&eacute;s pour la requ&ecirc;te.</p>
+            <p>Pas d'auteurs trouv&eacute;s pour la requ&ecirc;te '{{ $query_v }}'.</p>
           @endif
         </div>
       @endif
