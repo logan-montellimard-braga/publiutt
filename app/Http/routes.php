@@ -46,3 +46,5 @@ Route::auth();
 
 Route::get('/dashboard', ['as' => 'dashboard', 'middleware' => 'auth', 'uses' => 'HomeController@index']);
 Route::get('/profil', ['as' => 'profil', 'middleware' => 'auth', 'uses' => 'HomeController@profile']);
+
+Route::patch('/users/switch_admin/{user}', ['middleware' => 'auth', 'uses' => 'UserController@switchAdmin']);

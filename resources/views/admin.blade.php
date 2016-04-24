@@ -28,11 +28,22 @@
                 @foreach ($comptes as $compte)
                   <tr>
                     <td>{{ $compte->email }}</td>
-                    @if ($compte->is_admin)
-                      <td><i class="fa fa-check fa-fw"></i></td>
-                    @else
-                      <td><i class="fa fa-times fa-fw"></i></td>
-                    @endif
+                    <td>
+                      <form action="{{ url('users/switch_admin/'.$compte->id) }}" method="POST">
+                        {!! csrf_field() !!}
+                        {!! method_field('PATCH') !!}
+
+                        @if ($compte->is_admin)
+                          <button title="Révoquer privilège administrateur" type="submit" class="btn btn-default btn-xs">
+                            <i class="fa fa-check fa-fw"></i>
+                          </button>
+                        @else
+                          <button title="Ajouter privilège administrateur" type="submit" class="btn btn-default btn-xs">
+                            <i class="fa fa-times fa-fw"></i>
+                          </button>
+                        @endif
+                      </form>
+                    </td>
                     <td><a href="{{ url('/auteurs/show/'.$compte->auteur->id) }}">{{ $compte->auteur->prenom}} {{ $compte->auteur->nom }}</a> <a href="{{ url('/equipes/show/'.$compte->auteur->equipe->id) }}"><abbr title="{{ $compte->auteur->equipe->description }}">({{ $compte->auteur->equipe->nom }})</abbr></a></td>
                   </tr>
                 @endforeach
