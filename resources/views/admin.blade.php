@@ -20,7 +20,7 @@
               <thead>
                 <tr>
                   <th>E-Mail</th>
-                  <th>Administrateur</th>
+                  <th>Administrateur ?</th>
                   <th>Auteur associ&eacute;</th>
                 </tr>
               </thead>
@@ -34,12 +34,12 @@
                         {!! method_field('PATCH') !!}
 
                         @if ($compte->is_admin)
-                          <button title="Révoquer privilège administrateur" type="submit" class="btn btn-default btn-xs">
-                            <i class="fa fa-check fa-fw"></i>
+                          <button title="Révoquer privilège administrateur" type="submit" class="btn btn-default btn-sm">
+                            <i class="fa fa-toggle-on fa-fw"></i>
                           </button>
                         @else
-                          <button title="Ajouter privilège administrateur" type="submit" class="btn btn-default btn-xs">
-                            <i class="fa fa-times fa-fw"></i>
+                          <button title="Ajouter privilège administrateur" type="submit" class="btn btn-default btn-sm">
+                            <i class="fa fa-toggle-off fa-fw"></i>
                           </button>
                         @endif
                       </form>
