@@ -7,7 +7,7 @@
   <div class="container">
     <div class="row">
       <div class="col-md-10 col-md-offset-1">
-        <div class="col-md-8 col-sm-9">
+        <div class="col-md-9 col-sm-10">
           <a href="{{ url('/publications') }}"><i class="fa fa-angle-left"></i>&nbsp;Retour aux publications</a>
           <h2>Publications au statut <em>{{ $statut->nom }}</em></h2>
           @if ($publications->total() == 0)
@@ -25,14 +25,20 @@
             {!! $publications->links() !!}
           </div>
         </div>
-        <div class="col-md-4 col-sm-3 text-right">
+        <div class="col-md-3 col-sm-2">
           <h3>Statuts</h3>
           <ul>
             @foreach ($statuts as $st)
               @if ($st->id === $statut->id)
-                <li><b><a href="{{ url('/statuts/show/'.$st->id) }}">{{ $st->nom }}</a></b></li>
+                <li>
+                  <span title="{{ count($st->publications) }} publications" class="badge">{{ count($st->publications) }}</span>
+                  <a title="{{ count($st->publications) }} publications avec le statut {{ $st->nom }}" href="{{ url('/statuts/show/'.$st->id) }}"><b>{{ $st->nom }}</b></a>
+                </li>
               @else
-                <li><a href="{{ url('/statuts/show/'.$st->id) }}">{{ $st->nom }}</a></li>
+                <li>
+                  <span title="{{ count($st->publications) }} publications" class="badge">{{ count($st->publications) }}</span>
+                  <a title="{{ count($st->publications) }} publications avec le statut {{ $st->nom }}" href="{{ url('/statuts/show/'.$st->id) }}">{{ $st->nom }}</a>
+                </li>
               @endif
             @endforeach
           </ul>
