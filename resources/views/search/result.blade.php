@@ -26,22 +26,26 @@
         @endif
 
         @if ($type === 'func_lab_year' || $type === 'func_chercheur_hors_utt')
-          @foreach ($categories as $categorie)
-            <h3>{{ $categorie->nom }}</h3>
-            <?php $counter = 0; ?>
-            @foreach ($categorie->publications()->orderBy('annee', 'desc')->get() as $publication)
-              @if (in_array($publication->id, $publications))
-                <?php $counter++; ?>
-                <div class="col-md-8 col-sm-10">
-                  @include('publication.publication')
-                </div>
-                <p class="clearfix"></p>
+          @if (empty($publications))
+            <p>Pas de publications trouv&eacute;es pour cette recherche.</p>
+          @else
+            @foreach ($categories as $categorie)
+              <h3>{{ $categorie->nom }}</h3>
+              <?php $counter = 0; ?>
+              @foreach ($categorie->publications()->orderBy('annee', 'desc')->get() as $publication)
+                @if (in_array($publication->id, $publications))
+                  <?php $counter++; ?>
+                  <div class="col-md-8 col-sm-10">
+                    @include('publication.publication')
+                  </div>
+                  <p class="clearfix"></p>
+                @endif
+              @endforeach
+              @if (count($categorie->publications) === 0 || $counter === 0)
+                Pas de publications dans cette cat&eacute;gorie.
               @endif
             @endforeach
-            @if (count($categorie->publications) === 0 || $counter === 0)
-              Pas de publications dans cette cat&eacute;gorie.
-            @endif
-          @endforeach
+          @endif
         @endif
 
         @if ($type === 'func_all')
