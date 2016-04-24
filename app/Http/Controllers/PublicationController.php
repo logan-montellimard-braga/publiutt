@@ -17,7 +17,13 @@ class PublicationController extends Controller
 
     public function index(Request $request)
     {
-        $publications = Publication::orderBy('annee', 'desc')->orderBy('created_at', 'desc')->paginate(5);
+        $this->validate($request, [
+            'per_page' => 'integer|min:1|max:100',
+        ]);
+
+        $per_page = $request->per_page ? $request->per_page : 5;
+
+        $publications = Publication::orderBy('annee', 'desc')->orderBy('created_at', 'desc')->paginate($per_page);
 
         return view('publication.index', [
             'categories' => Categorie::all(),
@@ -93,12 +99,18 @@ class PublicationController extends Controller
         $statuts = Statut::all();
         $organisations = Organisation::all();
 
+        $auteurs_id = array();
+        foreach ($publication->auteurs as $auteur) {
+            $auteurs_id[] = $auteur->id;
+        }
+
         return view('publication.edit', [
             'pub' => $publication,
             'categories' => $categories,
             'equipes' => $equipes,
             'statuts' => $statuts,
             'organisations' => $organisations,
+            'auteurs' => $auteurs_id,
         ]);
     }
 
