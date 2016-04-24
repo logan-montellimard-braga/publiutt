@@ -31,6 +31,28 @@
               </li>
             @endforeach
           </ul>
+
+          <br>
+          <hr>
+
+          <h2>Auteurs de l'organisation</h2>
+          @if (count($auteurs) === 0)
+            <p>Il n'y a pas encore d'auteurs enregistr&eacute;s pour cette organisation.</p>
+          @else
+            <p>{{ $auteurs->total() }} auteurs :
+          @endif
+          <ul>
+            @foreach ($auteurs as $auteur)
+              <li>
+                <a href="{{ url('/auteurs/show/'.$auteur->id) }}">{{ $auteur->prenom }} {{ $auteur->nom }}</a>
+                (<a href="{{ url('/equipes/show/'.$auteur->equipe->id) }}"><abbr title="{{ $auteur->equipe->description }}">{{ $auteur->equipe->nom }}</abbr></a>)
+                - {{ count($auteur->publications) }} publications
+              </li>
+            @endforeach
+          </ul>
+          <div class="text-center">
+            {!! $auteurs->links() !!}
+          </div>
         </div>
         <div class="col-md-3">
           <h3>Organisations li&eacute;es *</h3>

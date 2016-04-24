@@ -26,6 +26,7 @@ class OrganisationController extends Controller
         return view('organisation.show', [
             'organisation' => $organisation,
             'linked_organisations' => $organisation->linked_organisations(),
+            'auteurs' => $organisation->auteurs()->orderBy('equipe_id')->orderBy('nom')->orderBy('prenom')->paginate(10),
         ]);
     }
 
