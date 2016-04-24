@@ -55,7 +55,7 @@
             <form class="navbar-form navbar-left" role="search" action="{{ url('/search/results') }}" method="GET">
               {!! csrf_field() !!}
               <div class="form-group">
-                <input required name="query_v" type="text" class="form-control" placeholder="Rechercher...">
+                <input required name="query_v" type="text" class="form-control" placeholder="Rechercher..." value="@yield('search_query')">
                 <input type="hidden" name="s_type" value="query">
               </div>
               <button type="submit" class="btn btn-theme"><i class="fa fa-search"></i></button>

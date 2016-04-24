@@ -17,7 +17,7 @@
               <div class="input-group-addon">
                 <i class="fa fa-fw fa-search"></i>
               </div>
-              <input required name="query_v" type="text" class="form-control input-lg" placeholder="Titre, référence ou lieu...">
+              <input required name="query_v" type="text" class="form-control input-lg" placeholder="Titre, référence, lieu, ann&eacute;e...">
             </div>
           </div>
 

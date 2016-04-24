@@ -38,8 +38,10 @@ class SearchController extends Controller
         case 'query':
             $publications = Publication::where('titre', 'like', '%' . $request->query_v . '%')
                 ->orWhere('reference', 'like', '%' . $request->query_v . '%')
-                ->orWhere('lieu', 'like', '%' . $request->query_v . '%')
-                ->get();
+                ->orWhere('lieu', 'like', '%' . $request->query_v . '%');
+            if (preg_match('/[12]\d{3}/', $request->query_v))
+                $publications->orWhere('annee', 'LIKE', $request->query_v . '%');
+            $publications = $publications->get();
             break;
 
         case 'auteur_query':
@@ -51,8 +53,10 @@ class SearchController extends Controller
         case 'all':
             $publications = Publication::where('titre', 'like', '%' . $request->query_v . '%')
                 ->orWhere('reference', 'like', '%' . $request->query_v . '%')
-                ->orWhere('lieu', 'like', '%' . $request->query_v . '%')
-                ->get();
+                ->orWhere('lieu', 'like', '%' . $request->query_v . '%');
+            if (preg_match('/[12]\d{3}/', $request->query_v))
+                $publications->orWhere('annee', 'LIKE', $request->query_v . '%');
+            $publications = $publications->get();
             $auteurs = Auteur::where('nom', 'like', '%' . $request->query_v . '%')
                 ->orWhere('prenom', 'like', '%' . $request->query_v . '%')
                 ->get();

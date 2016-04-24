@@ -20,6 +20,7 @@
           @endif
         @endif
         @if ($type === 'all' || $type === 'query')
+          @section('search_query', $query_v)
           @if (count($publications) > 0)
             @foreach ($publications as $publication)
               <div class="col-md-8 col-sm-10">
@@ -73,6 +74,7 @@
         @endif
 
         @if ($type === 'all' || $type === 'auteur_query')
+          @section('search_query', $query_v)
           <br>
           <hr>
           <h2>Auteurs</h2>
