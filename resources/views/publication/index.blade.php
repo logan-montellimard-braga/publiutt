@@ -12,6 +12,10 @@
 
                 <p class="clearfix"></p>
 
+                <p>
+                  <a href="" class="publi-collapse-all"><i class="fa fa-fw fa-minus"></i>&nbsp;Tout minimiser</a>
+                  <a href="" class="publi-expand-all"><i class="fa fa-fw fa-plus"></i>&nbsp;Tout maximiser</a>
+                </p>
                 <ul class="publications">
                   @foreach($publications as $publication)
                     <li>

@@ -496,9 +496,9 @@ footer a:hover, footer a:focus {
 }
 
 .publication {
-  border-left: 4px solid #395682;
-  padding-left: 10px;
-  overflow: hidden;
+  /* border-left: 4px solid #395682; */
+  /* padding-left: 10px; */
+  /* overflow: hidden; */
 }
 
 .publication-in {
@@ -525,10 +525,10 @@ footer a:hover, footer a:focus {
 }
 
 .publication .authors a:hover, .publication .authors a:focus {
-  border-bottom: 2px solid #f9f9f9;
+  border-bottom: 2px solid #f5f5f5;
 }
 
-.publication .date {
+.date {
   font-style: italic;
 }
 
@@ -537,10 +537,27 @@ footer a:hover, footer a:focus {
   font-variant: small-caps;
   text-transform: uppercase;
   margin-right: 3px;
-  padding: 3px 5px;
+  /* padding: 4px 5px; */
   color: white;
-  background: #394682;
-  font-size: 0.7em;
+  background: #B49262;
+  /* font-size: 0.7em; */
+}
+
+.publi-collapse:hover {
+  cursor: pointer;
+}
+
+.publication .panel-body p {
+  margin: 0;
+  color: #585858;
+}
+
+.publication .panel-heading {
+  font-weight: bold;
+}
+
+.publication a.download-button {
+  color: #B49262;
 }
 
 a.dash-icon {
@@ -644,6 +661,30 @@ ul.intact li {
   border-color: #395682;
   background: #395682;
   font-weight: bold;
+}
+
+.panel-primary {
+  border-color: #ccc;
+}
+
+.panel-primary .panel-heading {
+  background: #395682;
+  border-color: #395682;
+}
+
+.panel-heading a {
+  color: white;
+}
+.panel-heading a:hover {
+  color: white;
+  border-color: white;
+  /* font-weight: bold; */
+  /* border-bottom: none; */
+}
+
+.panel-primary>.panel-heading .badge {
+  color: #395682;
+  margin-right: 5px;
 }
 
 

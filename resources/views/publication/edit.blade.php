@@ -143,7 +143,11 @@
                 @foreach ($organisations as $organisation)
                   @foreach ($organisation->equipes as $equipe)
                     @foreach ($equipe->auteurs as $auteur)
-                      <option value="{{ $auteur->id }}">{{ strtoupper($auteur->nom) }} {{ $auteur->prenom }} - {{ $equipe->nom }}</option>
+                      @if (in_array($auteur->id, $auteurs))
+                        <option selected value="{{ $auteur->id }}">{{ strtoupper($auteur->nom) }} {{ $auteur->prenom }} - {{ $equipe->nom }}</option>
+                      @else
+                        <option value="{{ $auteur->id }}">{{ strtoupper($auteur->nom) }} {{ $auteur->prenom }} - {{ $equipe->nom }}</option>
+                      @endif
                     @endforeach
                   @endforeach
                 @endforeach

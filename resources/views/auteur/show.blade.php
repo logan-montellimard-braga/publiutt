@@ -21,22 +21,25 @@
           <hr>
 
           <h2>Publications de {{ $auteur->prenom }} {{ $auteur->nom }}</h2>
-          @if (count($auteur->publications) === 0)
+          @if (count($publications) === 0)
             <p>Cet auteur n'a pas encore post&eacute; de publications.</p>
           @else
             @if ($firstPub === $lastPub)
-              <p>{{ count($auteur->publications) }} publications en {{ $firstPub }} :</p>
+              <p>{{ $publications->total() }} publications en {{ $firstPub }} :</p>
             @else
-              <p>{{ count($auteur->publications) }} publications entre {{ $firstPub }} et {{ $lastPub }} :</p>
+              <p>{{ $publications->total() }} publications entre {{ $firstPub }} et {{ $lastPub }} :</p>
             @endif
           @endif
           <ul class="publications">
-            @foreach ($auteur->publications()->orderBy('annee', 'desc')->get() as $publication)
+            @foreach ($publications as $publication)
               <li class="publication publication-in">
                 @include('publication.publication')
               </li>
             @endforeach
           </ul>
+          <div class="text-center">
+            {!! $publications->links() !!}
+          </div>
         </div>
         <div class="col-md-3">
           <h3>Co-auteurs</h3>
