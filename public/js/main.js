@@ -14,14 +14,14 @@
 
   $('.publi-expand-all').hide();
   $('.publi-collapse-all').click(function() {
-    $('.publications .collapse').collapse('hide');
+    $('.publication .collapse').collapse('hide');
     $('.publi-collapse').addClass('fa-plus').removeClass('fa-minus');
     $(this).hide();
     $(this).siblings('.publi-expand-all').show();
     return false;
   });
   $('.publi-expand-all').click(function() {
-    $('.publications .collapse').collapse('show');
+    $('.publication .collapse').collapse('show');
     $('.publi-collapse').addClass('fa-minus').removeClass('fa-plus');
     $(this).hide();
     $(this).siblings('.publi-collapse-all').show();
