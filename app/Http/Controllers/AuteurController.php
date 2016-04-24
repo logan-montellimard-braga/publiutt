@@ -24,7 +24,7 @@ class AuteurController extends Controller
     public function show(Request $request, Auteur $auteur)
     {
         return view('auteur.show', [
-            'publications' => $auteur->publications()->orderBy('annee', 'desc')->orderBy('created_at', 'desc')->paginate(3),
+            'publications' => $auteur->publications()->orderBy('categorie_id')->orderBy('annee', 'desc')->orderBy('created_at', 'desc')->paginate(3),
             'coauteurs' => $auteur->coauteurs(),
             'auteur' => $auteur,
             'firstPub' => $auteur->firstPublicationYear(),

@@ -21,9 +21,9 @@
             </p>
             <br>
             <p>
-              Cat&eacute;goris&eacute; <b><a href="{{ url('/search/results/?categorie='.$publication->categorie->id) }}">{{ $publication->categorie->nom }}</a></b>.
+              Cat&eacute;goris&eacute; <b><a href="{{ url('/categories/show/'.$publication->categorie->id) }}">{{ $publication->categorie->nom }}</a></b>.
               <br>
-              Statut <b><a href="{{ url('/search/results/?statut='.$publication->statut->id) }}">{{ $publication->statut->nom }}</a></b>.
+              Statut <b><a href="{{ url('/statuts/show/'.$publication->statut->id) }}">{{ $publication->statut->nom }}</a></b>.
               <br>
               Ajout&eacute;e le {{ date('j/m/Y à H:i', strtotime($publication->created_at)) }}.
             </p>

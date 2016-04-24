@@ -42,15 +42,19 @@
           </div>
         </div>
         <div class="col-md-3">
-          <h3>Co-auteurs</h3>
+          <h3>Co-auteurs *</h3>
           @if (count($coauteurs) === 0)
             <p>Cet auteur n'a pas publi&eacute; avec d'autres auteurs.</p>
           @endif
           <ul>
             @foreach ($coauteurs as $coauteur)
-              <li><a title="{{ $coauteur->prenom }} {{ $coauteur->nom }} - {{ $coauteur->equipe->nom }}"href="{{ url('/auteurs/show/'.$coauteur->id) }}">{{ $coauteur->prenom }} {{ $coauteur->nom }}</a></li>
+              <li><span class="badge" title="Nombre de co-publications">{{ $coauteur->nb_publications }}</span> <a title="{{ $coauteur->prenom }} {{ $coauteur->nom }} - {{ $coauteur->equipe->nom }}"href="{{ url('/auteurs/show/'.$coauteur->id) }}">{{ $coauteur->prenom }} {{ $coauteur->nom }}</a></li>
             @endforeach
           </ul>
+          <br>
+          <p>
+            <em>* : Les co-auteurs sont class&eacute;s par ordre d&eacute;croissant du nombre de co-publications avec {{ $auteur->prenom }} {{ $auteur->nom }}.</em>
+          </p>
         </div>
       </div>
     </div>

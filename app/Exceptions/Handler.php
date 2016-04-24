@@ -49,6 +49,10 @@ class Handler extends ExceptionHandler
             \Session::flash('flash_message_error', "Vous n'êtes pas autorisé à réaliser cette action.");
             return redirect('/');
         }
+        if ($e instanceof ModelNotFoundException) {
+            \Session::flash('flash_message_error', "L'instance demandée n'existe pas.");
+            return redirect('/');
+        }
         return parent::render($request, $e);
     }
 }

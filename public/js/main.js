@@ -28,6 +28,13 @@
     return false;
   });
 
+  $('[data-toggle="collapse"]').click(function() {
+    var id = $(this).attr('href');
+    var group = $(id).attr('data-group');
+    $('[data-group="' + group + '"]').collapse('hide');
+    $(id).collapse('show');
+  });
+
   $('.to-content').click(function(e){
     e.preventDefault();
     $('html, body').animate({

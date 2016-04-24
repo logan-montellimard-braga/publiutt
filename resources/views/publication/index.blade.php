@@ -37,7 +37,8 @@
                   {!! csrf_field() !!}
                   <div class="form-group">
                     <div class="input-group input-group-lg">
-                      <input required name="query" type="text" class="form-control input-lg" placeholder="Rechercher une publication, un auteur, ...">
+                      <input required name="query_v" type="text" class="form-control input-lg" placeholder="Rechercher une publication, un auteur, ...">
+                      <input type="hidden" name="s_type" value="all">
                       <span class="input-group-btn">
                         <button type="submit" class="btn btn-lg btn-theme"><i class="fa fa-search"></i></button>
                       </span>
@@ -55,7 +56,7 @@
                   @foreach ($categories as $categorie)
                   <li>
                     <span title="{{ count($categorie->publications) }} publications"class="badge">{{ count($categorie->publications) }}</span>
-                    <a title="{{ count($categorie->publications) }} publications dans la catégorie {{ $categorie->nom }}" href="{{ url('/search/results/?categorie='.$categorie->id) }}">{{ $categorie->nom }}</a>
+                    <a title="{{ count($categorie->publications) }} publications dans la catégorie {{ $categorie->nom }}" href="{{ url('/categories/show/'.$categorie->id) }}">{{ $categorie->nom }}</a>
                   </li>
                   @endforeach
                 </ul>
@@ -66,7 +67,7 @@
                   @foreach ($statuts as $statut)
                     <li>
                       <span title="{{ count($statut->publications) }} publications" class="badge">{{ count($statut->publications) }}</span>
-                      <a title="{{ count($statut->publications) }} publications avec le statut {{ $statut->nom }}" href="{{ url('/search/results/?statut='.$statut->id) }}">{{ $statut->nom }}</a>
+                      <a title="{{ count($statut->publications) }} publications avec le statut {{ $statut->nom }}" href="{{ url('/statuts/show/'.$statut->id) }}">{{ $statut->nom }}</a>
                     </li>
                   @endforeach
                 </ul>

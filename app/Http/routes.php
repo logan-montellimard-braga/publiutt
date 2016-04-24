@@ -36,6 +36,9 @@ Route::patch('/publications/edit/{publication}', ['middleware' => 'auth', 'uses'
 Route::post('/publications', ['middleware' => 'auth', 'uses' => 'PublicationController@store']);
 Route::delete('/publications/{publication}', ['middleware' => 'auth', 'uses' => 'PublicationController@destroy']);
 
+Route::get('/statuts/show/{statut}', 'StatutController@show');
+Route::get('/categories/show/{categorie}', 'CategorieController@show');
+
 Route::get('/search', 'SearchController@index');
 Route::get('/search/results', 'SearchController@find');
 

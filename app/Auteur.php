@@ -33,14 +33,36 @@ class Auteur extends Model
     {
         $coauteurs = array();
         $_coauteurs = array();
+        $__coauteurs_pubs = array();
         foreach ($this->publications as $publications) {
             foreach ($publications->auteurs as $coauteur) {
+                if (isset($__coauteurs_pubs[$coauteur->id]))
+                    $__coauteurs_pubs[$coauteur->id]++;
+                else
+                    $__coauteurs_pubs[$coauteur->id] = 1;
+
                 if ($coauteur->id != $this->id && !(in_array($coauteur->id, $_coauteurs))) {
                     $_coauteurs[] = $coauteur->id;
                     $coauteurs[] = $coauteur;
+
                 }
             }
         }
+
+        foreach ($coauteurs as $coauteur) {
+            $coauteur->nb_publications = $__coauteurs_pubs[$coauteur->id];
+        }
+
+        usort($coauteurs, function(Auteur $a, Auteur $b) use ($__coauteurs_pubs) {
+            if ($__coauteurs_pubs[$a->id] == $__coauteurs_pubs[$b->id])
+                return 0;
+
+            if ($__coauteurs_pubs[$a->id] < $__coauteurs_pubs[$b->id])
+                return 1;
+
+            return -1;
+        });
+
         return $coauteurs;
     }
 
@@ -73,6 +95,22 @@ class Auteur extends Model
     public function publications()
     {
         return $this->belongsToMany(Publication::class)->withPivot('ordre');
+    }
+
+    public function publicationsHorsUTT()
+    {
+        $publications = array();
+        foreach ($this->publications as $publication) {
+            if (count($publication->auteurs) === 1) break;
+            foreach ($publication->auteurs as $p_auteur) {
+                if (!($p_auteur->isChercheurUTT())) {
+                    $publications[] = $publication;
+                    break;
+                }
+            }
+        }
+
+        return $publications;
     }
 
     public static function doublons()

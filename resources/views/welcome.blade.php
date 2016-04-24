@@ -66,7 +66,8 @@
             {!! csrf_field() !!}
             <div class="form-group">
               <div class="input-group input-group-lg">
-                <input required name="query" type="text" class="form-control input-lg" placeholder="Rechercher une publication, un auteur, ...">
+                <input required name="query_v" type="text" class="form-control input-lg" placeholder="Rechercher une publication, un auteur, ...">
+                <input type="hidden" name="s_type" value="all">
                 <span class="input-group-btn">
                   <button type="submit" class="btn btn-lg btn-theme"><i class="fa fa-search"></i></button>
                 </span>
@@ -86,7 +87,7 @@
           <h3>Cat&eacute;gories</h3>
           <ul>
             @foreach ($categories as $categorie)
-              <li><a href="{{ url('/search/results/?categorie='.$categorie->id) }}">{{ $categorie->nom }}</a></li>
+              <li><a href="{{ url('/categories/show/'.$categorie->id) }}">{{ $categorie->nom }}</a></li>
             @endforeach
           </ul>
           @if ($organisation)

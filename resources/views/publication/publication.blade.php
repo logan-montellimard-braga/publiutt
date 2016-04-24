@@ -1,10 +1,10 @@
 <div class="publication panel panel-primary">
   <div class="panel-heading">
     <div class="row">
-      <div class="col-xs-6">
+      <div class="col-xs-10">
         <span title="{{ $publication->categorie->nom }}" class="badge tooltip-on">{{ $publication->categorie->initials() }}</span>&nbsp;<a href="{{ url('/publications/show/'.$publication->id) }}">{{ $publication->titre }}</a>
       </div>
-      <div class="col-xs-6 text-right">
+      <div class="col-xs-2 text-right">
         <i class="publi-collapse fa fa-fw fa-minus" data-toggle="collapse" data-target="#publi_{{ $publication->id }}" aria-expanded="true" aria-controls="publi_{{ $publication->id }}"></i>
       </div>
     </div>
