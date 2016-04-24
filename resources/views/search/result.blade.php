@@ -12,7 +12,7 @@
         @if (!($type === 'auteur_query'))
           <h2>Publications</h2>
           <p class="clearfix"></p>
-          @if (count($publications) > 0)
+          @if (count($publications) > 1)
             <p>
               <a href="" class="publi-collapse-all"><i class="fa fa-fw fa-minus"></i>&nbsp;Tout minimiser</a>
               <a href="" class="publi-expand-all"><i class="fa fa-fw fa-plus"></i>&nbsp;Tout maximiser</a>
