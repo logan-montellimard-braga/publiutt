@@ -5,6 +5,7 @@
         <div class="container">
           <div class="row">
             <div class="col-md-8 col-md-offset-2">
+              <a href="{{ url('/search#auteur_recherche_directe') }}"><i class="fa fa-angle-right"></i>&nbsp;Rechercher un auteur</a>
               <h2>Auteurs enregistr&eacute;es</h2>
               <div class="table-responsive">
                 <table class="table">
