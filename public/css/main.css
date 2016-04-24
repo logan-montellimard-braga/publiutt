@@ -687,6 +687,10 @@ ul.intact li {
   margin-right: 5px;
 }
 
+.publication a.badge, .publication a.badge:hover {
+  border-bottom: none;
+}
+
 
 /* ==========================================================================
 Media Queries

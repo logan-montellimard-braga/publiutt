@@ -2,7 +2,7 @@
   <div class="panel-heading">
     <div class="row">
       <div class="col-xs-10">
-        <span title="{{ $publication->categorie->nom }}" class="badge tooltip-on">{{ $publication->categorie->initials() }}</span>&nbsp;<a href="{{ url('/publications/show/'.$publication->id) }}">{{ $publication->titre }}</a>
+        <a href="{{ url('/categories/show/'.$publication->categorie->id) }}" title="{{ $publication->categorie->nom }}" class="badge tooltip-on">{{ $publication->categorie->initials() }}</a>&nbsp;<a href="{{ url('/publications/show/'.$publication->id) }}">{{ $publication->titre }}</a>
       </div>
       <div class="col-xs-2 text-right">
         <i class="publi-collapse fa fa-fw fa-minus" data-toggle="collapse" data-target="#publi_{{ $publication->id }}" aria-expanded="true" aria-controls="publi_{{ $publication->id }}"></i>
@@ -17,7 +17,7 @@
         </div>
         <div class="col-xs-6 text-right">
           <p>
-            <span title="Statut de la publication"><i class=" "></i>&nbsp;{{ $publication->statut->nom }}</span>
+            <span title="Statut de la publication"><a href="{{ url('/statuts/show/'.$publication->statut->id) }}">{{ $publication->statut->nom }}</a></span>
           </p>
         </div>
       </div>
