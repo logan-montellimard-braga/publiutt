@@ -83,7 +83,7 @@
                   @endif
                   <ul class="dropdown-menu">
                     <li class="{{ Route::getCurrentRoute()->getName() === 'dashboard' ? 'active' : '' }}"><a href="{{ url('/dashboard') }}">Tableau de bord</a></li>
-                    <li class="{{ Route::getCurrentRoute()->getName() === 'profil' ? 'active' : '' }}"><a href="{{ url('/auteurs/show/'.Auth::user()->auteur->id) }}">Mon profil</a></li>
+                    <li class="{{ 0 === strpos(Route::getCurrentRoute()->getName(), 'profil') ? 'active' : '' }}"><a href="{{ url('/profil') }}">Mon profil</a></li>
                     <li><a href="{{ url('/logout') }}">D&eacute;connexion</a></li>
                   </ul>
                 </li>

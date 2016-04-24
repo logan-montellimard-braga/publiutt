@@ -7,7 +7,16 @@
       <div class="col-md-10 col-md-offset-1">
         <div class="col-md-9">
           @if (Auth::user())
-            <a href="{{ url('/auteurs') }}"><i class="fa fa-angle-left"></i>&nbsp;Retour aux auteurs</a>
+          <div class="row">
+            <div class="col-sm-6">
+              <a href="{{ url('/auteurs') }}"><i class="fa fa-angle-left"></i>&nbsp;Retour aux auteurs</a>
+            </div>
+            <div class="col-sm-6 text-right">
+              @if (Auth::user()->auteur->id === $auteur->id)
+                <a href="{{ url('/profil/edit') }}"><i class="fa fa-angle-right"></i>&nbsp;Modifier mon profil</a>
+              @endif
+            </div>
+          </div>
           @endif
           <h2>D&eacute;tail d'un auteur</h2>
 

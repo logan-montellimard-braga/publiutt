@@ -29,10 +29,21 @@ class HomeController extends Controller
     public function profile()
     {
         return view('auteur.show', [
+            'publications' => \Auth::user()->auteur->publications()->orderBy('categorie_id')->orderBy('annee', 'desc')->orderBy('created_at', 'desc')->paginate(3),
             'auteur' => \Auth::user()->auteur,
             'coauteurs' => \Auth::user()->auteur->coauteurs(),
             'firstPub' => \Auth::user()->auteur->firstPublicationYear(),
             'lastPub' => \Auth::user()->auteur->lastPublicationYear(),
+        ]);
+    }
+
+    public function editProfile(User $user)
+    {
+        return view('auth.edit', [
+            'user' => \Auth::user(),
+            'auteur' => \Auth::user()->auteur,
+            'etablissement' => Organisation::UTT()->all()[0]->etablissement,
+            'equipes' => Organisation::UTT()->all()[0]->equipes,
         ]);
     }
 
