@@ -7,7 +7,7 @@
   <div class="container">
     <div class="row">
       <div class="col-md-10 col-md-offset-1">
-        <div class="col-md-9 col-sm-10">
+        <div class="col-md-9 col-sm-8">
           <a href="{{ url('/publications') }}"><i class="fa fa-angle-left"></i>&nbsp;Retour aux publications</a>
           <h2>Publications au statut <em>{{ $statut->nom }}</em></h2>
           @if ($publications->total() == 0)
@@ -25,7 +25,7 @@
             {!! $publications->links() !!}
           </div>
         </div>
-        <div class="col-md-3 col-sm-2">
+        <div class="col-md-3 col-sm-4">
           <h3>Statuts</h3>
           <ul>
             @foreach ($statuts as $st)
