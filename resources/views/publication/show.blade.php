@@ -40,11 +40,11 @@
             <a href="{{ url('/publications/edit/'.$publication->id) }}"><i class="fa fa-angle-right"></i>&nbsp;Modifier la publication</a>
           @endif
           <h3>Auteurs</h3>
-          <ul>
-            @foreach ($publication->auteurs as $auteur)
+          <ol>
+            @foreach ($publication->auteurs()->withPivot('ordre')->orderBy('ordre')->get() as $auteur)
               <li><a title="{{ $auteur->prenom }} {{ $auteur->nom }} - {{ $auteur->equipe->nom }}"href="{{ url('/auteurs/show/'.$auteur->id) }}">{{ $auteur->prenom }} {{ $auteur->nom }}</a></li>
             @endforeach
-          </ul>
+          </ol>
           <hr>
           <h3>&Eacute;quipes</h3>
           <ul>

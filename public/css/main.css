@@ -691,6 +691,13 @@ ul.intact li {
   border-bottom: none;
 }
 
+ol {
+  padding-left: 0;
+}
+ol li {
+  list-style-position: inside;
+}
+
 
 /* ==========================================================================
 Media Queries
