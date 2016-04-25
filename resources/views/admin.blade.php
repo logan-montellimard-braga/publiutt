@@ -34,7 +34,7 @@
                         {!! method_field('PATCH') !!}
 
                         @if ($compte->is_admin)
-                          <button title="Révoquer privilège administrateur" type="submit" class="btn btn-default btn-sm">
+                          <button {{ Auth::user()->id === $compte->id ? 'disabled' : '' }} title="Révoquer privilège administrateur" type="submit" class="btn btn-default btn-sm">
                             <i class="fa fa-toggle-on fa-fw"></i>
                           </button>
                         @else
