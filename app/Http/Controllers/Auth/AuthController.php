@@ -94,7 +94,7 @@ class AuthController extends Controller
             $equipes = array_merge($equipes, $org->equipes()->get()->all());
         }
         $data['equipes'] = $equipes;
-        $data['etablissement'] = $etablissement;
+        $data['etablissement'] = $organisation->all()[0]->etablissement;
         return view('auth.register', $data);
     }
 }
