@@ -27,7 +27,11 @@
         <div class="col-xs-10">
           <ul class="authors">
             @foreach ($publication->auteurs()->withPivot('ordre')->orderBy('ordre')->get() as $auteur)
-              <li><a class="tooltip-on badge" title="{{ $auteur->equipe->nom }} ({{ $auteur->organisation->nom }})" href="{{ url('/auteurs/show/'.$auteur->id) }}">{{ $auteur->prenom }} {{ $auteur->nom }}</a></li>
+              @if ($auteur->isChercheurUTT())
+                <li><a class="tooltip-on badge" title="{{ $auteur->equipe->nom }} ({{ $auteur->organisation->nom }})" href="{{ url('/auteurs/show/'.$auteur->id) }}">{{ $auteur->prenom }} {{ $auteur->nom }}</a></li>
+              @else
+                <li><a class="tooltip-on badge" title="{{ $auteur->equipe->nom }} ({{ $auteur->organisation->nom }})" href="{{ url('/auteurs/show/'.$auteur->id) }}"><i class="fa fa-fw fa-globe"></i>&nbsp;{{ $auteur->prenom }} {{ $auteur->nom }}</a></li>
+              @endif
             @endforeach
           </ul>
         </div>

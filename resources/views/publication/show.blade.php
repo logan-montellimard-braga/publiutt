@@ -42,7 +42,11 @@
           <h3>Auteurs</h3>
           <ol>
             @foreach ($publication->auteurs()->withPivot('ordre')->orderBy('ordre')->get() as $auteur)
-              <li><a title="{{ $auteur->prenom }} {{ $auteur->nom }} - {{ $auteur->equipe->nom }}"href="{{ url('/auteurs/show/'.$auteur->id) }}">{{ $auteur->prenom }} {{ $auteur->nom }}</a></li>
+              @if ($auteur->isChercheurUTT())
+                <li><a title="{{ $auteur->prenom }} {{ $auteur->nom }} - {{ $auteur->equipe->nom }}"href="{{ url('/auteurs/show/'.$auteur->id) }}">{{ $auteur->prenom }} {{ $auteur->nom }}</a></li>
+              @else
+                <li><a title="{{ $auteur->prenom }} {{ $auteur->nom }} - {{ $auteur->equipe->nom }}"href="{{ url('/auteurs/show/'.$auteur->id) }}"><i class="fa fa-fw fa-globe"></i>&nbsp;{{ $auteur->prenom }} {{ $auteur->nom }}</a></li>
+              @endif
             @endforeach
           </ol>
           <hr>
