@@ -14,6 +14,7 @@
           <p class="clearfix"></p>
 
           <h4><b>{{ $equipe->nom }}</b></h4>
+          <h6><a href="{{ url('/organisations/show/'.$equipe->organisation->id) }}">{{ $equipe->organisation->nom }} ({{ $equipe->organisation->etablissement }})</a></h6>
           <p>{{ $equipe->description }}</p>
 
           <br>
