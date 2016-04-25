@@ -34,9 +34,9 @@
             <p>Cet auteur n'a pas encore post&eacute; de publications.</p>
           @else
             @if ($firstPub === $lastPub)
-              <p>{{ $publications->total() }} publications en {{ $firstPub }} :</p>
+              <p>{{ $publications->total() }} publications en {{ $firstPub }} (<a href="{{ url('/search/results?s_type=func_chercheur_hors_utt&chercheur='.$auteur->id) }}">{{ count($auteur->publicationsHorsUTT()) }} hors-UTT</a>) :</p>
             @else
-              <p>{{ $publications->total() }} publications entre {{ $firstPub }} et {{ $lastPub }} :</p>
+              <p>{{ $publications->total() }} publications entre {{ $firstPub }} et {{ $lastPub }} (<a href="{{ url('/search/results?s_type=func_chercheur_hors_utt&chercheur='.$auteur->id) }}">{{ count($auteur->publicationsHorsUTT()) }} hors-UTT</a>) :</p>
             @endif
           @endif
           <ul class="publications">
