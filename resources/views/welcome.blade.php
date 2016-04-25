@@ -11,9 +11,9 @@
         <div class="row">
           <div class="col-sm-12">
             <h1>Publi<b>UTT</b></h1>
-            <span>La biblioth&egrave;que des publications scientifiques</span>
+            <span>La biblioth&egrave;que des publications<span class="hidden-xs"> scientifiques</span></span>
             <div class="clearfix"></div>
-            <span>par les chercheurs de l'UTT</span>
+            <span>par les chercheurs <span class="hidden-xs">de l'</span>UTT</span>
           </div>
         </div>
         <div class="row">
@@ -26,7 +26,7 @@
           </div>
         </div>
       </div>
-      <div class="bottom-content to-content">
+      <div class="bottom-content to-content hidden-xs">
         <div class="row">
           <div class="col-sm-12">
             <i class="fa fa-angle-double-down"></i>
