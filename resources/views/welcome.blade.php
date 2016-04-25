@@ -9,11 +9,17 @@
       <div class="dark"></div>
       <div class="content">
         <div class="row">
-          <div class="col-sm-12">
+          <div class="col-sm-12 hidden-xs">
             <h1>Publi<b>UTT</b></h1>
-            <span>La biblioth&egrave;que des publications<span class="hidden-xs"> scientifiques</span></span>
+            <span>La biblioth&egrave;que des publications scientifiques</span>
             <div class="clearfix"></div>
-            <span>par les chercheurs <span class="hidden-xs">de l'</span>UTT</span>
+            <span>par les chercheurs de l'UTT</span>
+          </div>
+          <div class="col-xs-12 visible-xs">
+            <h1>Publi<b>UTT</b></h1>
+            <span>La biblioth&egrave;que des publications</span>
+            <div class="clearfix"></div>
+            <span>par les chercheurs UTT</span>
           </div>
         </div>
         <div class="row">
