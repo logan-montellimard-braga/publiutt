@@ -40,7 +40,11 @@
           @endif
           <ul>
             @foreach ($linked_equipes as $le)
-              <li><a href="{{ url('/equipes/show/'.$le->id) }}"><abbr title="{{ $le->description }}">{{ $le->nom }}</abbr></a></li>
+              @if ($le->isEquipeUTT())
+                <li><a href="{{ url('/equipes/show/'.$le->id) }}"><abbr title="{{ $le->description }}">{{ $le->nom }}</abbr></a></li>
+              @else
+                <li><a href="{{ url('/equipes/show/'.$le->id) }}"><i class="fa fa-fw fa-globe"></i>&nbsp;<abbr title="{{ $le->description }}">{{ $le->nom }}</abbr></a></li>
+              @endif
             @endforeach
           </ul>
           <br>
