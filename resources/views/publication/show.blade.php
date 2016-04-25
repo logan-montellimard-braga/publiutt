@@ -53,7 +53,11 @@
           <h3>&Eacute;quipes</h3>
           <ul>
             @foreach ($equipes as $equipe)
-              <li><a href="{{ url('/equipes/show/'.$equipe->id) }}"><abbr title="{{ $equipe->description }}">{{ $equipe->nom }}</abbr></a></li>
+              @if ($equipe->isEquipeUTT())
+                <li><a href="{{ url('/equipes/show/'.$equipe->id) }}"><abbr title="{{ $equipe->description }}">{{ $equipe->nom }}</abbr></a></li>
+              @else
+                <li><a href="{{ url('/equipes/show/'.$equipe->id) }}"><i class="fa fa-fw fa-globe"></i>&nbsp;<abbr title="{{ $equipe->description }}">{{ $equipe->nom }}</abbr></a></li>
+              @endif
             @endforeach
           </ul>
           <hr>

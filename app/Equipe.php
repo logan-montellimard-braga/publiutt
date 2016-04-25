@@ -33,6 +33,11 @@ class Equipe extends Model
         return $return;
     }
 
+    public function isEquipeUTT()
+    {
+        return in_array($this->organisation, Organisation::UTT()->all());
+    }
+
     public function linked_equipes()
     {
         $equipes = array();
