@@ -52,11 +52,11 @@
               <select required class="form-control" name="equipe">
                 <option selected disabled>Laboratoire</option>
                 @foreach ($organisations as $organisation)
-                <optgroup label="{{ $organisation->nom }} ( {{ $organisation->etablissement }} )">
-                  @foreach ($organisation->equipes as $equipe)
-                  <option value="{{ $equipe->id }}">{{ $equipe->nom }}</option>
-                  @endforeach
-                </optgroup>
+                  <optgroup label="{{ $organisation->nom }} ({{ $organisation->etablissement }})">
+                    @foreach ($organisation->equipes as $equipe)
+                      <option value="{{ $equipe->id }}">{{ $equipe->nom }} ({{ count($equipe->publications()) }} publications)</option>
+                    @endforeach
+                  </optgroup>
                 @endforeach
               </select>
             </div>
@@ -101,11 +101,11 @@
               <select required class="form-control" name="chercheur">
                 <option selected disabled>Chercheur</option>
                 @foreach ($organisations as $organisation)
-                <optgroup label="{{ $organisation->nom }} ( {{ $organisation->etablissement }} )">
+                <optgroup label="{{ $organisation->nom }} ({{ $organisation->etablissement }})">
                   @foreach ($organisation->equipes as $equipe)
                   <optgroup label="{{ $equipe->nom }}">
                     @foreach ($equipe->auteurs as $auteur)
-                    <option value="{{ $auteur->id }}">{{ $auteur->prenom }} {{ $auteur->nom }}</option>
+                    <option value="{{ $auteur->id }}">{{ $auteur->prenom }} {{ $auteur->nom }} ({{ count($auteur->publicationsHorsUTT()) }} p. hors-UTT)</option>
                     @endforeach
                   </optgroup>
                   @endforeach
