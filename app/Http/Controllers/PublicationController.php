@@ -122,14 +122,9 @@ class PublicationController extends Controller
             'annee' => 'required|max:' . date('Y') . '|min:1950|integer',
             'statut' => 'required|exists:statuts,id',
             'categorie' => 'required|exists:categories,id',
-            'document' => 'required',
             'lieu' => 'required_if:is_conference,true|min:2|max:255',
             'auteurs' => 'required',
         ]);
-
-        $filename = time() . rand(11111, 99999) . '.' . $request->file('document')->getClientOriginalExtension();
-        $uploads = base_path() . '/public/upload/';
-        $request->file('document')->move($uploads, $filename);
 
         $ups = array(
             'titre' => $request->titre,
@@ -137,9 +132,15 @@ class PublicationController extends Controller
             'annee' => $request->annee . '-01-01',
             'statut_id' => $request->statut,
             'categorie_id' => $request->categorie,
-            'document' => $filename,
             'lieu' => $request->lieu,
         );
+        if ($request->hasFile('document')) {
+            $filename = time() . rand(11111, 99999) . '.' . $request->file('document')->getClientOriginalExtension();
+            $uploads = base_path() . '/public/upload/';
+            $request->file('document')->move($uploads, $filename);
+            $ups['document'] = $filename;
+        }
+
         $publication->update($ups);
 
         $auteurs = explode(',', $request->auteurs);

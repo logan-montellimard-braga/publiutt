@@ -122,7 +122,7 @@
                 <i class="fa fa-fw fa-file"></i>
               </div>
               <span class="btn btn-default btn-file btn-lg btn-block">
-                <span class="filename">S&eacute;lectionner un document...</span> <input id="file_select" required name="document" type="file">
+                <span class="filename">S&eacute;lectionner un document...</span> <input id="file_select" name="document" type="file">
               </span>
             </div>
             @if ($errors->has('document'))
