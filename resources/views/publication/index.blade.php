@@ -12,20 +12,24 @@
 
                 <p class="clearfix"></p>
 
-                <p>
-                  <a href="" class="publi-collapse-all"><i class="fa fa-fw fa-minus"></i>&nbsp;Tout minimiser</a>
-                  <a href="" class="publi-expand-all"><i class="fa fa-fw fa-plus"></i>&nbsp;Tout maximiser</a>
-                </p>
-                <ul class="publications">
-                  @foreach($publications as $publication)
-                    <li>
-                      @include('publication.publication')
-                    </li>
-                  @endforeach
-                </ul>
-                <div class="text-center">
-                  {!! $publications->links() !!}
-                </div>
+                @if (count($publications) === 0)
+                  <p>Il n'y a pas encore de publications.</p>
+                @else
+                  <p>
+                    <a href="" class="publi-collapse-all"><i class="fa fa-fw fa-minus"></i>&nbsp;Tout minimiser</a>
+                    <a href="" class="publi-expand-all"><i class="fa fa-fw fa-plus"></i>&nbsp;Tout maximiser</a>
+                  </p>
+                  <ul class="publications">
+                    @foreach($publications as $publication)
+                      <li>
+                        @include('publication.publication')
+                      </li>
+                    @endforeach
+                  </ul>
+                  <div class="text-center">
+                    {!! $publications->links() !!}
+                  </div>
+                @endif
 
                 <hr class="hidden-xs">
 
@@ -51,17 +55,19 @@
                 </p>
               </div>
               <div class="col-md-3 col-sm-4">
-                <h3>Cat&eacute;gories</h3>
-                <ul>
-                  @foreach ($categories as $categorie)
-                  <li>
-                    <span title="{{ count($categorie->publications) }} publications"class="badge">{{ count($categorie->publications) }}</span>
-                    <a title="{{ count($categorie->publications) }} publications dans la catégorie {{ $categorie->nom }}" href="{{ url('/categories/show/'.$categorie->id) }}">{{ $categorie->nom }}</a>
-                  </li>
-                  @endforeach
-                </ul>
-                <div class="clearfix"></div>
-                <hr class="hidden-xs">
+                @if (count($categories) > 0)
+                  <h3>Cat&eacute;gories</h3>
+                  <ul>
+                    @foreach ($categories as $categorie)
+                    <li>
+                      <span title="{{ count($categorie->publications) }} publications"class="badge">{{ count($categorie->publications) }}</span>
+                      <a title="{{ count($categorie->publications) }} publications dans la catégorie {{ $categorie->nom }}" href="{{ url('/categories/show/'.$categorie->id) }}">{{ $categorie->nom }}</a>
+                    </li>
+                    @endforeach
+                  </ul>
+                  <div class="clearfix"></div>
+                  <hr class="hidden-xs">
+                @endif
                 <h3>Statuts</h3>
                 <ul>
                   @foreach ($statuts as $statut)
@@ -71,7 +77,7 @@
                     </li>
                   @endforeach
                 </ul>
-                @if ($organisation)
+                @if ($organisation && count($organisation->equipes) > 0)
                   <div class="clearfix"></div>
                   <hr class="hidden-xs">
                   <h3>&Eacute;quipes UTT-<abbr title="Institut Charles Delaunay">ICD</abbr></h3>

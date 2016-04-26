@@ -50,17 +50,21 @@
 
           <p class="clearfix"></p>
 
-          <ul class="publications">
-            @foreach($publications as $publication)
-              <li>
-                @include('publication.publication')
-              </li>
-            @endforeach
-          </ul>
+          @if (count($publications) === 0)
+            <p>Il n'y a pas encore de publications.</p>
+          @else
+            <ul class="publications">
+              @foreach($publications as $publication)
+                <li>
+                  @include('publication.publication')
+                </li>
+              @endforeach
+            </ul>
 
-          <p class="text-right">
-            <a href="{{ url('/publications') }}"><i class="fa fa-plus"></i>&nbsp;Voir toutes les publications</a>
-          </p>
+            <p class="text-right">
+              <a href="{{ url('/publications') }}"><i class="fa fa-plus"></i>&nbsp;Voir toutes les publications</a>
+            </p>
+          @endif
 
           <hr class="hidden-xs">
 
@@ -89,16 +93,18 @@
 
 
         <div class="col-sm-4 col-md-3">
-          <hr class="visible-xs">
-          <h3>Cat&eacute;gories</h3>
-          <ul>
-            @foreach ($categories as $categorie)
-              <li><a href="{{ url('/categories/show/'.$categorie->id) }}">{{ $categorie->nom }}</a></li>
-            @endforeach
-          </ul>
-          @if ($organisation)
+          @if (count($categories) > 0)
+            <hr class="visible-xs">
+            <h3>Cat&eacute;gories</h3>
+            <ul>
+              @foreach ($categories as $categorie)
+                <li><a href="{{ url('/categories/show/'.$categorie->id) }}">{{ $categorie->nom }}</a></li>
+              @endforeach
+            </ul>
             <div class="clearfix"></div>
             <hr class="hidden-xs">
+          @endif
+          @if ($organisation && count($organisation->equipes) > 0)
             <h3>&Eacute;quipes UTT-<abbr title="Institut Charles Delaunay">ICD</abbr></h3>
             <ul>
                 @foreach ($organisation->equipes as $equipe)
