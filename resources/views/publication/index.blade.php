@@ -6,7 +6,9 @@
           <div class="row">
             <div class="col-md-10 col-md-offset-1">
               <div class="col-md-9 col-sm-8">
-                <a href="{{ url('/publications/new') }}"><i class="fa fa-angle-right"></i>&nbsp;Ajouter une nouvelle publication</a>
+                @if (Auth::user())
+                  <a href="{{ url('/publications/new') }}"><i class="fa fa-angle-right"></i>&nbsp;Ajouter une nouvelle publication</a>
+                @endif
 
                 <h2>Publications enregistr&eacute;es</h2>
 
