@@ -1,5 +1,9 @@
 (function($) {
-  if (window.hasOwnProperty('jqReady')) $(function() {window.jqReady();});
+  // if (window.hasOwnProperty('jqReady'))
+  if (Object.prototype.hasOwnProperty.call(window, 'jqReady'))
+    $(function() {window.jqReady();});
+
+  $('input, textarea').placeholder();
 
   $(document).ready(function() {
     $('body').css('overflow-y', 'scroll');
@@ -11,6 +15,11 @@
   $('.publi-collapse').click(function() {
     $(this).toggleClass('fa-minus').toggleClass('fa-plus');
   });
+
+  if ($('html').hasClass('lt-ie10')) {
+    $('.collapse').addClass('in');
+    $('[data-toggle="collapse"]').attr('href', '#');
+  }
 
   $('.publi-expand-all').hide();
   $('.publi-collapse-all').click(function() {

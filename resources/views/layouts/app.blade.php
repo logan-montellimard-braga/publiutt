@@ -1,8 +1,9 @@
 <!DOCTYPE html>
-<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang=""> <![endif]-->
-<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8" lang=""> <![endif]-->
-<!--[if IE 8]>         <html class="no-js lt-ie9" lang=""> <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js" lang="fr"> <!--<![endif]-->
+<!--[if lt IE 7]>      <html class="no-js lt-ie10 lt-ie9 lt-ie8 lt-ie7" lang="fr"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie10 lt-ie9 lt-ie8" lang="fr"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie10 lt-ie9" lang="fr"> <![endif]-->
+<!--[if IE 9]>         <html class="no-js lt-ie10" lang="fr"> <![endif]-->
+<!--[if gt IE 9]><!--> <html class="no-js" lang="fr"> <!--<![endif]-->
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
@@ -25,7 +26,7 @@
   <!--[if lt IE 9]>
     <div class="browserupgrade alert alert-danger alert-dismissible">
       <button type="button" class="close" data-dismiss="alert" aria-label="Fermer"><span aria-hidden="true">&times;</span></button>
-      <p>Vous utilisez un navigateur <strong>obsol&egrave;te</strong>. Rendez-vous sur <a href="http://browsehappy.com/">ici</a> pour am&eacute;liorer votre exp&eacute;rience de navigation.</p>
+      <p>Vous utilisez un navigateur <strong>obsol&egrave;te</strong>. Rendez-vous <a href="http://browsehappy.com/">ici</a> pour am&eacute;liorer votre exp&eacute;rience de navigation.</p>
     </div>
   <![endif]-->
 
@@ -136,7 +137,7 @@
         <div class="row">
           <div class="col-sm-6 col-sm-offset-1">
             <a href="{{ url('/') }}" class="brand">Publi<b>UTT</b></a>
-            <span class="clearfix"></span>
+            <div class="clearfix"></div>
             <a class="author" target="_blank" href="http://loganbraga.fr">Logan Braga</a>
             <a class="author" target="_blank" href="#">Peirun Yu</a>
           </div>
@@ -150,6 +151,7 @@
 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
   <script>window.jQuery || document.write("<script src=\"{{ asset('js/vendor/jquery-1.11.2.min.js') }}\"><\/script>")</script>
+  <script src="{{ asset('js/vendor/jquery.placeholder.min.js') }}"></script>
   <script src="{{ asset('js/vendor/bootstrap.min.js') }}"></script>
   <script src="{{ asset('js/vendor/jquery.multi-select.js') }}"></script>
   <script src="{{ asset('js/main.js') }}"></script>

@@ -89,6 +89,10 @@ body {
   text-align: center;
 }
 
+.no-flexbox #loader {
+  display: block;
+}
+
 #loader .loader-wrap {
   margin: auto;
 }
@@ -223,11 +227,17 @@ header.main  {
           align-items: center;
 }
 
+.no-flexbox header.main {
+  display: block;
+  margin: auto;
+  padding: 50px;
+  padding-top: 10%;
+}
+
 header.main  .content, header.main  .bottom-content {
   text-align: left;
   color: white;
   width: 100%;
-  /* margin-left: 5vw; */
 }
 
 header.main  .content h1 {
@@ -270,6 +280,10 @@ header.main  .content span {
 .auth nav, .auth footer, .auth #band {
   display: none;
   visibility: hidden;
+}
+
+.no-flexbox .auth .bloc-form {
+  margin-top: 10%;
 }
 
 .error-page h1, .error-page h3 {
@@ -334,6 +348,11 @@ body.auth {
   -webkit-align-items: center;
       -ms-flex-align: center;
           align-items: center;
+}
+
+.no-flexbox #band {
+  margin: auto;
+  padding: 50px;
 }
 
 #band h1 {
