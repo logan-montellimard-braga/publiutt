@@ -594,6 +594,12 @@ footer a:hover, footer a:focus {
   cursor: pointer;
 }
 
+.publi-collapse-all, .publi-expand-all {
+  font-size: 0.7em;
+  font-variant: small-caps;
+  text-transform: uppercase;
+}
+
 .publication .panel-body p {
   margin: 0;
   color: #585858;

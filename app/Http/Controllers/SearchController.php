@@ -63,6 +63,7 @@ class SearchController extends Controller
             break;
 
         case 'func_all':
+            $publications = Publication::all();
             break;
 
         case 'func_lab_year':
