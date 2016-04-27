@@ -7,9 +7,17 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-  <title>PubliUTT &middot; @yield('title')</title>
-  <meta name="description" content="">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>PubliUTT &middot; @yield('title')</title>
+
+  <meta name="keywords" content="publiutt,utt,troyes,publications,chercheurs,science,laboratoire">
+  <meta name="description" content="PubliUTT, la bibliothèque des publications scientifiques par les chercheurs de l'UTT.">
+  <meta name="author" content="Logan BRAGA, contact@loganbraga.fr; Peirun YU, peirun.yu@utt.fr">
+
+  <link rel="copyright" href="LICENSE">
+  <link rel="author" href="humans.txt">
+
   <link rel="apple-touch-icon" href="/apple-touch-icon.png">
   <link rel="icon" type="image/png" href="/tile.png">
 
