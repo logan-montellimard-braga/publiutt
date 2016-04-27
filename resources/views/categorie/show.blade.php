@@ -11,9 +11,13 @@
           <a href="{{ url('/publications') }}"><i class="fa fa-angle-left"></i>&nbsp;Retour aux publications</a>
           <h2>Publications cat&eacute;goris&eacute;es <em>{{ $categorie->nom }}</em></h2>
           @if ($publications->total() == 0)
-            <p>Aucune publication.</p>
+            <p>Il n'y a pas encore de publications dans cette cat&eacute;gorie.</p>
           @else
-            <p>{{ $publications->total() }} publications :</p>
+            <p>{{ $publications->total() }} publications.</p>
+            <p>
+              <a href="" class="publi-collapse-all"><i class="fa fa-fw fa-minus"></i>&nbsp;Tout minimiser</a>
+              <a href="" class="publi-expand-all"><i class="fa fa-fw fa-plus"></i>&nbsp;Tout maximiser</a>
+            </p>
           @endif
 
           <ul class="publications">

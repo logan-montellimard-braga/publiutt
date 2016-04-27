@@ -17,6 +17,7 @@
                 @if (count($publications) === 0)
                   <p>Il n'y a pas encore de publications.</p>
                 @else
+                  <p>{{ $publications->total() }} publications.</p>
                   <p>
                     <a href="" class="publi-collapse-all"><i class="fa fa-fw fa-minus"></i>&nbsp;Tout minimiser</a>
                     <a href="" class="publi-expand-all"><i class="fa fa-fw fa-plus"></i>&nbsp;Tout maximiser</a>
