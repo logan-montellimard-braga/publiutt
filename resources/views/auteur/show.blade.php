@@ -34,10 +34,14 @@
             <p>Cet auteur n'a pas encore post&eacute; de publications.</p>
           @else
             @if ($firstPub === $lastPub)
-              <p>{{ $publications->total() }} publications en {{ $firstPub }} (<a href="{{ url('/search/results?s_type=func_chercheur_hors_utt&chercheur='.$auteur->id) }}">{{ count($auteur->publicationsHorsUTT()) }} hors-UTT</a>) :</p>
+              <p>{{ $publications->total() }} publications en {{ $firstPub }} (<a href="{{ url('/search/results?s_type=func_chercheur_hors_utt&chercheur='.$auteur->id) }}">{{ count($auteur->publicationsHorsUTT()) }} hors-UTT</a>).</p>
             @else
-              <p>{{ $publications->total() }} publications entre {{ $firstPub }} et {{ $lastPub }} (<a href="{{ url('/search/results?s_type=func_chercheur_hors_utt&chercheur='.$auteur->id) }}">{{ count($auteur->publicationsHorsUTT()) }} hors-UTT</a>) :</p>
+              <p>{{ $publications->total() }} publications entre {{ $firstPub }} et {{ $lastPub }} (<a href="{{ url('/search/results?s_type=func_chercheur_hors_utt&chercheur='.$auteur->id) }}">{{ count($auteur->publicationsHorsUTT()) }} hors-UTT</a>).</p>
             @endif
+            <p>
+              <a href="" class="publi-collapse-all"><i class="fa fa-fw fa-minus"></i>&nbsp;Tout minimiser</a>
+              <a href="" class="publi-expand-all"><i class="fa fa-fw fa-plus"></i>&nbsp;Tout maximiser</a>
+            </p>
           @endif
           <ul class="publications">
             @foreach ($publications as $publication)
