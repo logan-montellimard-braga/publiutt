@@ -183,9 +183,11 @@ nav a {
   color: #2C3E50;
 }
 
-.dropdown:hover .dropdown-menu {
-  display: block;
-  margin-top: 0;
+@media (min-width: 768px) {
+  .dropdown:hover .dropdown-menu {
+    display: block;
+    margin-top: 0;
+  }
 }
 
 .dropdown-menu {
