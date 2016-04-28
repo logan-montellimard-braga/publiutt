@@ -1,6 +1,30 @@
 @extends('layouts.app')
 
 @section('content')
+  @if (Auth::user())
+  <div class="modal fade" id="duplicateModal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Fermer"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title">Doublon potentiel</h4>
+        </div>
+        <div class="modal-body">
+          <p>
+            L'organisation `<span id="modal_organisation"></span>` semble d&eacute;j&agrave; exister.
+            <br>
+            Êtes-vous s&ucirc;r de vouloir cr&eacute;er cette organisation ?
+          </p>
+        </div>
+        <div class="modal-footer">
+          <button id="modal_cancel" type="button" class="btn btn-default" data-dismiss="modal">Annuler</button>
+          <button id="modal_ok" type="button" class="btn btn-theme">Envoyer quand m&ecirc;me</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  @endif
+
     <section>
         <div class="container">
           <div class="row">
@@ -90,6 +114,45 @@
         </div>
         @endif
     </section>
+
+    <script>
+      var orgaList = [
+      @foreach ($organisations as $organisation)
+        { nom: "{!! $organisation->nom !!}", etablissement: "{!! $organisation->etablissement !!}" },
+      @endforeach
+      ];
+    var jqReady = function() {
+      $(document).ready(function() {
+        $('#modal_ok').click(function() {
+          $('#modal_ok').attr('data-ok', 'true');
+          $('#add form').submit();
+        });
+
+        $('#add form').submit(function() {
+          if ($('#modal_ok').attr('data-ok') == 'true') return true;
+
+          var duplicate = false;
+
+          var newNom = $('input[name="institut"]').val();
+          var newEtab = $('input[name="etablissement"]').val();
+
+          for (var i = 0, len = orgaList.length; i < len; i++) {
+            if (orgaList[i].nom.toLowerCase() === newNom.toLowerCase() &&
+                orgaList[i].etablissement.toLowerCase() === newEtab.toLowerCase())
+              duplicate = true;
+          }
+
+          if (duplicate) {
+            $('#modal_organisation').text(newNom + ' (' + newEtab + ')');
+            $('#duplicateModal').modal('show');
+          } else {
+            return true;
+          }
+          return false;
+        });
+      });
+    };
+    </script>
 @endsection
 
 @section('title', 'Organisations')

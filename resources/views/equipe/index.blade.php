@@ -1,6 +1,30 @@
 @extends('layouts.app')
 
 @section('content')
+  @if (Auth::user())
+  <div class="modal fade" id="duplicateModal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Fermer"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title">Doublon potentiel</h4>
+        </div>
+        <div class="modal-body">
+          <p>
+            L'&eacute;quipe `<span id="modal_equipe"></span>` semble d&eacute;j&agrave; exister pour cette organisation.
+            <br>
+            Êtes-vous s&ucirc;r de vouloir cr&eacute;er cette &eacute;quipe ?
+          </p>
+        </div>
+        <div class="modal-footer">
+          <button id="modal_cancel" type="button" class="btn btn-default" data-dismiss="modal">Annuler</button>
+          <button id="modal_ok" type="button" class="btn btn-theme">Envoyer quand m&ecirc;me</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  @endif
+
     <section>
         <div class="container">
           <div class="row">
@@ -120,6 +144,47 @@
         </div>
         @endif
     </section>
+
+    <script>
+    var equipesList = [
+        @foreach ($organisations as $organisation)
+          @foreach ($organisation->equipes as $equipe)
+            { nom: "{!! $equipe->nom !!}", organisation: {!! $equipe->organisation_id !!} },
+          @endforeach
+        @endforeach
+    ];
+    var jqReady = function() {
+        $(document).ready(function() {
+            $('#modal_ok').click(function() {
+                $('#modal_ok').attr('data-ok', 'true');
+                $('#add form').submit();
+            });
+
+            $('#add form').submit(function() {
+                if ($('#modal_ok').attr('data-ok') == 'true') return true;
+
+                var duplicate = false;
+
+                var newNom = $('input[name="nom"]').val();
+                var newOrga = $('select[name="organisation"]').val();
+
+                for (var i = 0, len = equipesList.length; i < len; i++) {
+                    if (equipesList[i].nom.toLowerCase() === newNom.toLowerCase() &&
+                        equipesList[i].organisation == newOrga)
+                        duplicate = true;
+            }
+
+            if (duplicate) {
+                $('#modal_equipe').text(newNom);
+                $('#duplicateModal').modal('show');
+            } else {
+                return true;
+            }
+            return false;
+            });
+        });
+    };
+    </script>
 @endsection
 
 @section('title', 'Equipes')

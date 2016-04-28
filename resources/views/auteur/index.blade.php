@@ -1,6 +1,35 @@
 @extends('layouts.app')
 
 @section('content')
+  @if (Auth::user())
+  <div class="modal fade" id="duplicateModal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Fermer"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title">Doublon potentiel</h4>
+        </div>
+        <div class="modal-body">
+          <p class="duplicate">
+            L'auteur `<span class="modal_auteur"></span>` semble d&eacute;j&agrave; exister avec ce nom et pr&eacute;nom.
+            <br>
+            Êtes-vous s&ucirc;r de vouloir cr&eacute;er cet auteur ?
+          </p>
+          <p class="inversed">
+            L'auteur `<span class="modal_auteur"></span>` semble d&eacute;j&agrave; exister, mais avec nom et pr&eacute;nom invers&eacute;s.
+            <br>
+            Pensez-vous avoir commis une &eacute;tourderie sur ce point ?
+          </p>
+        </div>
+        <div class="modal-footer">
+          <button id="modal_cancel" type="button" class="btn btn-default" data-dismiss="modal">Annuler</button>
+          <button id="modal_ok" type="button" class="btn btn-theme">Envoyer quand m&ecirc;me</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  @endif
+
     <section>
         <div class="container">
           <div class="row">
@@ -129,6 +158,61 @@
         </div>
         @endif
     </section>
+
+    <script>
+    var auteursList = [
+      @foreach ($organisations as $organisation)
+        @foreach ($organisation->auteurs as $auteur)
+          { nom: "{!! $auteur->nom !!}", prenom: "{!! $auteur->prenom !!}" },
+        @endforeach
+      @endforeach
+    ];
+    var jqReady = function() {
+      $(document).ready(function() {
+        $('#modal_ok').click(function() {
+          $('#modal_ok').attr('data-ok', 'true');
+          $('#add form').submit();
+        });
+
+        $('#add form').submit(function() {
+          if ($('#modal_ok').attr('data-ok') == 'true') return true;
+
+          var duplicate = false;
+          var inverse = false;
+
+          var newNom = $('input[name="nom"]').val();
+          var newPrenom = $('input[name="prenom"]').val();
+
+          for (var i = 0, len = auteursList.length; i < len; i++) {
+            if (auteursList[i].nom.toLowerCase() === newNom.toLowerCase() &&
+                auteursList[i].prenom.toLowerCase() === newPrenom.toLowerCase()) {
+                  duplicate = true;
+            } else if (auteursList[i].nom.toLowerCase() === newPrenom.toLowerCase() &&
+                       auteursList[i].prenom.toLowerCase() === newNom.toLowerCase()) {
+                  inversed = true;
+            }
+          }
+
+          if (duplicate || inversed) {
+            $('.modal_auteur').text(newNom + " " + newPrenom);
+            $('#duplicateModal').modal('show');
+
+            if (inversed) {
+              $('#duplicateModal .duplicate').hide();
+              $('#duplicateModal .inversed').show();
+            }
+            if (duplicate) {
+              $('#duplicateModal .duplicate').show();
+              $('#duplicateModal .inversed').hide();
+            }
+          } else {
+            return true;
+          }
+          return false;
+        });
+      });
+    };
+    </script>
 @endsection
 
 @section('title', 'Auteurs')

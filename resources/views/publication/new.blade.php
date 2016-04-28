@@ -2,6 +2,34 @@
 @section('title', 'Nouvelle publication')
 
 @section('content')
+  @if (Auth::user())
+  <div class="modal fade" id="duplicateModal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Fermer"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title">Doublon potentiel</h4>
+        </div>
+        <div class="modal-body">
+          <p class="duplicate">
+            La publication `<span class="modal_publication"></span>` semble d&eacute;j&agrave; exister avec ce titre.
+            <br>
+            Êtes-vous s&ucirc;r de vouloir cr&eacute;er cette publication ?
+          </p>
+          <p class="duplicate_conference">
+            La conf&eacute;rence `<span class="modal_publication"></span>` semble d&eacute;j&agrave; exister sur <span class="modal_lieu"></span>.
+            <br>
+            Êtes-vous certain de vouloir cr&eacute;er cette conf&eacute;rence ?
+          </p>
+        </div>
+        <div class="modal-footer">
+          <button id="modal_cancel" type="button" class="btn btn-default" data-dismiss="modal">Annuler</button>
+          <button id="modal_ok" type="button" class="btn btn-theme">Envoyer quand m&ecirc;me</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  @endif
 <section>
   <div class="container">
     <div class="row">
@@ -167,11 +195,26 @@
   </section>
 
   <script>
+  var pubList = [
+    @foreach ($organisations as $organisation)
+      @foreach ($organisation->auteurs as $auteur)
+        @foreach ($auteur->publications as $publication)
+            { titre: "{!! $publication->titre !!}", lieu: "{!! $publication->lieu !!}" },
+        @endforeach
+      @endforeach
+    @endforeach
+  ];
+
   window.jqReady = function() {
     $('#auteurs_ms').multiSelect({
         keepOrder: true,
         selectableHeader: "<div class='ms-header'>Auteurs disponibles</div>",
         selectionHeader: "<div class='ms-header'>Auteurs de la publication</div>",
+    });
+
+    $('#modal_ok').click(function() {
+      $('#modal_ok').attr('data-ok', 'true');
+      $('section form').submit();
     });
 
     $('#add').submit(function() {
@@ -185,9 +228,45 @@
           });
         });
         $('#auteurs').val(selections);
+
+
+        if ($('#modal_ok').attr('data-ok') == 'true') return true;
+        var duplicate = false;
+        var duplicate_conference = false;
+
+        var newTitre = $('input[name="titre"]').val();
+        var newLieu = $('input[name="lieu"]').val();
+        var isConf = $('[name="is_conference"]').is(':checked');
+
+        for (var i = 0, len = pubList.length; i < len; i++) {
+          if (isConf && pubList[i].titre.toLowerCase() === newTitre.toLowerCase() &&
+             pubList[i].lieu.toLowerCase() === newLieu.toLowerCase()) {
+            duplicate_conference = true;
+          } else if (pubList[i].titre.toLowerCase() === newTitre.toLowerCase()) {
+            duplicate = true;
+          }
+        }
+
+        if (duplicate || duplicate_conference) {
+          $('.modal_publication').text(newTitre);
+          $('#duplicateModal').modal('show');
+
+          if (duplicate_conference) {
+            $('.modal_lieu').text(newLieu);
+            $('#duplicateModal .duplicate').hide();
+            $('#duplicateModal .duplicate_conference').show();
+          }
+          if (duplicate) {
+            $('#duplicateModal .duplicate').show();
+            $('#duplicateModal .duplicate_conference').hide();
+          }
+        } else {
+          return true;
+        }
+        return false;
     })
 
-    $('#lieu').hide();
+    if (!($('#is_conference').is(':checked'))) $('#lieu').hide();
     $('#file_select').change(function() {
         var name = $('#file_select').val().split('\\');
         name = name[name.length - 1];
