@@ -23,6 +23,9 @@ class AuteurController extends Controller
 
     public function show(Request $request, Auteur $auteur)
     {
+        if (\Auth::user() && $auteur->id === \Auth::user()->auteur->id)
+            return redirect('/profil');
+
         return view('auteur.show', [
             'publications' => $auteur->publications()->orderBy('categorie_id')->orderBy('annee', 'desc')->orderBy('created_at', 'desc')->paginate(3),
             'coauteurs' => $auteur->coauteurs(),
