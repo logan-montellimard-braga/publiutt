@@ -85,8 +85,14 @@
                 </li>
               @else
                 <li class="dropdown">
+                  @if (Auth::user()->is_admin)
+                  @endif
                   @if (Auth::user()->auteur != null)
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{ Auth::user()->auteur->prenom }} {{ Auth::user()->auteur->nom }}&nbsp;<i class="fa fa-angle-down"></i></span></a>
+                    @if (Auth::user()->is_admin)
+                      <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="badge tooltip-on" title="Administrateur" data-placement="bottom"><i class="fa fa-star"></i></span>&nbsp;{{ Auth::user()->auteur->prenom }} {{ Auth::user()->auteur->nom }}&nbsp;<i class="fa fa-angle-down"></i></span></a>
+                    @else
+                      <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{ Auth::user()->auteur->prenom }} {{ Auth::user()->auteur->nom }}&nbsp;<i class="fa fa-angle-down"></i></span></a>
+                    @endif
                   @else
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{ Auth::user()->email }}&nbsp;<i class="fa fa-angle-down"></i></span></a>
                   @endif
