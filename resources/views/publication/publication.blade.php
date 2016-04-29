@@ -13,7 +13,11 @@
     <div class="panel-body">
       <div class="row">
         <div class="col-sm-7">
-          <p><span title="Référence">{{ $publication->reference }}</span>, <span title="Année de publication" class="date">{{ date('Y', strtotime($publication->annee)) }}</span></p>
+          <p><span title="Référence">{{ $publication->reference }}</span>, <span title="Année de publication" class="date">{{ date('Y', strtotime($publication->annee)) }}</span>
+              @if ($publication->lieu)
+                - {{ $publication->lieu }}
+              @endif
+          </p>
         </div>
         <div class="col-sm-5 hidden-xs text-right">
           <p>
