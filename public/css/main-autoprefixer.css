@@ -1175,6 +1175,32 @@ input[type="radio"] .styled:checked + label::after {
   float: left;
   width: 48%;
 }
+
+.search-input {
+  width: 52%;
+  margin-bottom: 5px;
+}
+
+@media (min-width: 992px) and (max-width: 1200px) {
+  .search-input {
+    width: 52.7%;
+  }
+}
+
+@media (max-width: 768px) {
+  .ms-container .ms-selectable, .ms-container .ms-selection{
+    width: 100%;
+  }
+
+  .ms-container .ms-selectable {
+    padding-bottom: 15px;
+  }
+
+  .search-input {
+    width: 100%;
+  }
+}
+
 .ms-container .ms-selection{
   float: right;
 }

@@ -133,6 +133,7 @@
           </div>
 
           <input type="hidden" id="auteurs" name="auteurs" />
+          <input type='text' class='input-sm search-input form-control' autocomplete='off' placeholder='Filtrer les auteurs disponibles...'>
 
           <div class="form-group{{ $errors->has('auteurs') ? ' has-error' : '' }}">
             <div class="input-group input-group-lg">
@@ -196,11 +197,32 @@
 
 <script>
 window.jqReady = function() {
-    $('#auteurs_ms').multiSelect({
-    keepOrder: true,
+    $.getScript('/js/vendor/jquery.quicksearch.min.js', function() {
+      $('#auteurs_ms').multiSelect({
+        keepOrder: true,
         selectableHeader: "<div class='ms-header'>Auteurs disponibles</div>",
         selectionHeader: "<div class='ms-header'>Auteurs de la publication</div>",
-});
+        afterInit: function(ms){
+          var that = this,
+              $selectableSearch = $('.search-input'),
+              selectableSearchString = '#'+that.$container.attr('id')+' .ms-elem-selectable:not(.ms-selected)';
+
+          that.qs1 = $selectableSearch.quicksearch(selectableSearchString)
+          .on('keydown', function(e){
+            if (e.which === 40){
+              that.$selectableUl.focus();
+              return false;
+            }
+          });
+        },
+        afterSelect: function(){
+          this.qs1.cache();
+        },
+        afterDeselect: function(){
+          this.qs1.cache();
+        }
+      });
+    });
 
 $('#add').submit(function() {
     var selections = [];
