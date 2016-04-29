@@ -54,6 +54,36 @@ class AuteurController extends Controller
         return redirect('/auteurs');
     }
 
+    public function edit(Request $request, Auteur $auteur)
+    {
+        $this->authorize('edit', $auteur);
+
+        return view('auteur.edit', [
+            'auteur' => $auteur,
+            'organisations' => Organisation::orderBy('nom')->get(),
+        ]);
+    }
+
+    public function update(Request $request, Auteur $auteur)
+    {
+        $this->authorize('edit', $auteur);
+        $this->validate($request, [
+            'nom' => 'required|max:255|min:2',
+            'prenom' => 'required|max:255|min:2',
+            'equipe' => 'required|integer|exists:equipes,id',
+        ]);
+
+        $auteur->update([
+            'nom' => $request->nom,
+            'prenom' => $request->prenom,
+            'equipe_id' => $request->equipe,
+        ]);
+
+        \Session::flash('flash_message', "Modification de l'auteur `$request->prenom $request->nom` effectuée avec succès.");
+
+        return redirect('/auteurs/show/' . $auteur->id);
+    }
+
     public function destroy(Request $request, Auteur $auteur)
     {
         $this->authorize('destroy', $auteur);

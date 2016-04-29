@@ -20,7 +20,12 @@ class AuteurPolicy
         //
     }
 
-    public function destroy(User $user, Auteur $equipe)
+    public function edit(User $user, Auteur $auteur)
+    {
+        return $user->is_admin;
+    }
+
+    public function destroy(User $user, Auteur $auteur)
     {
         return $user->is_admin;
     }

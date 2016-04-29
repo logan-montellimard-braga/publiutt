@@ -15,16 +15,22 @@ Route::get('/', ['as' => 'root', 'uses' => 'HomeController@welcome']);
 
 Route::get('/organisations', 'OrganisationController@index');
 Route::get('/organisations/show/{organisation}', 'OrganisationController@show');
+Route::get('/organisations/edit/{organisation}', ['uses' => 'OrganisationController@edit', 'middleware' => 'auth']);
+Route::patch('/organisations/edit/{organisation}', ['uses' => 'OrganisationController@update', 'middleware' => 'auth']);
 Route::post('/organisations', ['uses' => 'OrganisationController@store', 'middleware' => 'auth']);
 Route::delete('/organisations/{organisation}', ['uses' => 'OrganisationController@destroy', 'middleware' => 'auth']);
 
 Route::get('/equipes', 'EquipeController@index');
 Route::get('/equipes/show/{equipe}', 'EquipeController@show');
+Route::get('/equipes/edit/{equipe}', ['uses' => 'EquipeController@edit', 'middleware' => 'auth']);
+Route::patch('/equipes/edit/{equipe}', ['uses' => 'EquipeController@update', 'middleware' => 'auth']);
 Route::post('/equipes', ['uses' => 'EquipeController@store', 'middleware' => 'auth']);
 Route::delete('/equipes/{equipe}', ['uses' => 'EquipeController@destroy', 'middleware' => 'auth']);
 
 Route::get('/auteurs', 'AuteurController@index');
 Route::get('/auteurs/show/{auteur}', 'AuteurController@show');
+Route::get('/auteurs/edit/{auteur}', ['uses' => 'AuteurController@edit', 'middleware' => 'auth']);
+Route::patch('/auteurs/edit/{auteur}', ['uses' => 'AuteurController@update', 'middleware' => 'auth']);
 Route::post('/auteurs', ['uses' => 'AuteurController@store', 'middleware' => 'auth']);
 Route::delete('/auteurs/{auteur}', ['uses' => 'AuteurController@destroy', 'middleware' => 'auth']);
 

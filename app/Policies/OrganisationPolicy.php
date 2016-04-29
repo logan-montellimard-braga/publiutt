@@ -20,6 +20,11 @@ class OrganisationPolicy
         //
     }
 
+    public function edit(User $user, Organisation $organisation)
+    {
+        return $user->is_admin;
+    }
+
     public function destroy(User $user, Organisation $organisation)
     {
         return $user->is_admin;

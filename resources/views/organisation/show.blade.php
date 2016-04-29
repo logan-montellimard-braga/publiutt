@@ -6,9 +6,18 @@
     <div class="row">
       <div class="col-md-10 col-md-offset-1">
         <div class="col-md-9">
-          @if (Auth::user())
-            <a href="{{ url('/organisations') }}"><i class="fa fa-angle-left"></i>&nbsp;Retour aux organisations</a>
-          @endif
+          <div class="row">
+            <div class="col-sm-6">
+              @if (Auth::user())
+                <a href="{{ url('/organisations') }}"><i class="fa fa-angle-left"></i>&nbsp;Retour aux organisations</a>
+              @endif
+            </div>
+            <div class="col-sm-6 text-right">
+              @if (Auth::user() && Auth::user()->is_admin)
+                <a href="{{ url('/organisations/edit/'.$organisation->id) }}"><i class="fa fa-angle-right"></i>&nbsp;Modifier l'organisation</a>
+              @endif
+            </div>
+          </div>
           <h2>D&eacute;tail d'une organisation</h2>
 
           <p class="clearfix"></p>

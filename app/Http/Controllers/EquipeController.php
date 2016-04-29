@@ -31,7 +31,7 @@ class EquipeController extends Controller
 
     public function store(Request $request)
     {
-        $this->validate($request, [
+       $this->validate($request, [
             'nom' => 'required|max:255|min:1',
             'description' => 'required',
             'organisation' => 'required|integer|exists:organisations,id',
@@ -46,6 +46,36 @@ class EquipeController extends Controller
         \Session::flash('flash_message', "Création de l'équipe `$request->nom` effectuée avec succès.");
 
         return redirect('/equipes');
+    }
+
+    public function edit(Request $request, Equipe $equipe)
+    {
+        $this->authorize('edit', $equipe);
+
+        return view('equipe.edit', [
+            'equipe' => $equipe,
+            'organisations' => Organisation::orderBy('nom')->get(),
+        ]);
+    }
+
+    public function update(Request $request, Equipe $equipe)
+    {
+        $this->authorize('edit', $equipe);
+        $this->validate($request, [
+            'nom' => 'required|max:255|min:1',
+            'description' => 'required',
+            'organisation' => 'required|integer|exists:organisations,id',
+        ]);
+
+        $equipe->update([
+            'nom' => $request->nom,
+            'description' => $request->description,
+            'organisation_id' => $request->organisation,
+        ]);
+
+        \Session::flash('flash_message', "Modification de l'équipe `$request->nom` effectuée avec succès.");
+
+        return redirect('/equipes/show/' . $equipe->id);
     }
 
     public function destroy(Request $request, Equipe $equipe)

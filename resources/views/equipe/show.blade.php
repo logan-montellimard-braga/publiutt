@@ -6,9 +6,18 @@
     <div class="row">
       <div class="col-md-10 col-md-offset-1">
         <div class="col-md-9">
-          @if (Auth::user())
-            <a href="{{ url('/equipes') }}"><i class="fa fa-angle-left"></i>&nbsp;Retour aux &eacute;quipes</a>
-          @endif
+          <div class="row">
+            <div class="col-sm-6">
+              @if (Auth::user())
+                <a href="{{ url('/equipes') }}"><i class="fa fa-angle-left"></i>&nbsp;Retour aux &eacute;quipes</a>
+              @endif
+            </div>
+            <div class="col-sm-6 text-right">
+              @if (Auth::user() && Auth::user()->is_admin)
+              <a href="{{ url('/equipes/edit/'.$equipe->id) }}"><i class="fa fa-angle-right"></i>&nbsp;Modifier l'&eacute;quipe</a>
+              @endif
+            </div>
+          </div>
           <h2>D&eacute;tail d'une &eacute;quipe</h2>
 
           <p class="clearfix"></p>

@@ -67,6 +67,7 @@
                                 {!! csrf_field() !!}
                                 {!! method_field('DELETE') !!}
 
+                                <a href="{{ url('/auteurs/edit/'.$auteur->id) }}" class="btn btn-xs btn-default"><i class="fa fa-cogs"></i></a>
                                 <button title="Supprimer" type="submit" class="btn btn-danger btn-xs">
                                   <i class="fa fa-btn fa-trash"></i>
                                 </button>

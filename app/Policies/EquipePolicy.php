@@ -20,6 +20,11 @@ class EquipePolicy
         //
     }
 
+    public function edit(User $user, Equipe $equipe)
+    {
+        return $user->is_admin;
+    }
+
     public function destroy(User $user, Equipe $equipe)
     {
         return $user->is_admin;

@@ -39,6 +39,7 @@
                       <th>Auteurs</th>
                       @if (Auth::user() && Auth::user()->is_admin)
                         <th></th>
+                        <th></th>
                       @endif
                     </tr>
                   </thead>
@@ -54,6 +55,9 @@
                           <td>{{ count($equipe->auteurs) }}</td>
                           @if (Auth::user() && Auth::user()->is_admin)
                           <td class="text-right">
+                            <a href="{{ url('/equipes/edit/'.$equipe->id) }}" class="btn btn-xs btn-default"><i class="fa fa-cogs"></i></a>
+                          </td>
+                          <td class="">
                             <form action="{{ url('equipes/'.$equipe->id) }}" method="POST">
                               {!! csrf_field() !!}
                               {!! method_field('DELETE') !!}

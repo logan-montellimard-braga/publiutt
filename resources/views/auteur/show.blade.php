@@ -14,6 +14,8 @@
             <div class="col-sm-6 text-right">
               @if (Auth::user()->auteur->id === $auteur->id)
                 <a href="{{ url('/profil/edit') }}"><i class="fa fa-angle-right"></i>&nbsp;Modifier mon profil</a>
+              @elseif (Auth::user()->is_admin)
+                <a href="{{ url('/auteurs/edit/'.$auteur->id) }}"><i class="fa fa-angle-right"></i>&nbsp;Modifier l'auteur</a>
               @endif
             </div>
           </div>

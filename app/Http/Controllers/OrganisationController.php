@@ -47,6 +47,33 @@ class OrganisationController extends Controller
         return redirect('/organisations');
     }
 
+    public function edit(Request $request, Organisation $organisation)
+    {
+        $this->authorize('edit', $organisation);
+
+        return view('organisation.edit', [
+            'organisation' => $organisation,
+        ]);
+    }
+
+    public function update(Request $request, Organisation $organisation)
+    {
+        $this->authorize('edit', $organisation);
+        $this->validate($request, [
+            'institut' => 'required|max:255|min:2',
+            'etablissement' => 'required|max:255|min:2',
+        ]);
+
+        $organisation->update([
+            'nom' => $request->institut,
+            'etablissement' => $request->etablissement,
+        ]);
+
+        \Session::flash('flash_message', "Modification de l'organisation `$request->institut` effectuée avec succès.");
+
+        return redirect('/organisations/show/' . $organisation->id);
+    }
+
     public function destroy(Request $request, Organisation $organisation)
     {
         $this->authorize('destroy', $organisation);
