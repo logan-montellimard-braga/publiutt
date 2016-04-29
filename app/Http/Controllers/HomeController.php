@@ -51,7 +51,7 @@ class HomeController extends Controller
     {
         $categories = Categorie::all();
         $organisation = Organisation::UTT();
-        $publications = Publication::orderBy('annee', 'desc')->limit(3)->get();
+        $publications = Publication::orderBy('annee', 'desc')->orderBy('created_at', 'desc')->limit(3)->get();
 
         return view('welcome', [
             'categories' => $categories,
