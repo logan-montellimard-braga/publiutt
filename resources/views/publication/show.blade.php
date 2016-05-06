@@ -43,9 +43,9 @@
           <ol>
             @foreach ($publication->auteurs()->withPivot('ordre')->orderBy('ordre')->get() as $auteur)
               @if ($auteur->isChercheurUTT())
-                <li><a title="{{ $auteur->prenom }} {{ $auteur->nom }} - {{ $auteur->equipe->nom }}"href="{{ url('/auteurs/show/'.$auteur->id) }}">{{ $auteur->prenom }} {{ $auteur->nom }}</a></li>
+                <li><a title="{{ $auteur->prenom }} {{ $auteur->nom }} - {{ $auteur->equipe->nom }} ({{ $auteur->organisation->nom }})" href="{{ url('/auteurs/show/'.$auteur->id) }}">{{ $auteur->prenom }} {{ $auteur->nom }} - <abbr title="{{ $auteur->equipe->description }}">{{ $auteur->equipe->nom }}</abbr></a></li>
               @else
-                <li><a title="{{ $auteur->prenom }} {{ $auteur->nom }} - {{ $auteur->equipe->nom }}"href="{{ url('/auteurs/show/'.$auteur->id) }}"><i class="fa fa-fw fa-globe"></i>&nbsp;{{ $auteur->prenom }} {{ $auteur->nom }}</a></li>
+                <li><a title="{{ $auteur->prenom }} {{ $auteur->nom }} - {{ $auteur->equipe->nom }} ({{ $auteur->organisation->nom }})" href="{{ url('/auteurs/show/'.$auteur->id) }}">{{ $auteur->prenom }} {{ $auteur->nom }} - <abbr title="{{ $auteur->equipe->description }}">{{ $auteur->equipe->nom }}</abbr> ({{ $auteur->organisation->nom }})</a></li>
               @endif
             @endforeach
           </ol>
@@ -56,7 +56,7 @@
               @if ($equipe->isEquipeUTT())
                 <li><a href="{{ url('/equipes/show/'.$equipe->id) }}"><abbr title="{{ $equipe->description }}">{{ $equipe->nom }}</abbr></a></li>
               @else
-                <li><a href="{{ url('/equipes/show/'.$equipe->id) }}"><i class="fa fa-fw fa-globe"></i>&nbsp;<abbr title="{{ $equipe->description }}">{{ $equipe->nom }}</abbr></a></li>
+                <li><a href="{{ url('/equipes/show/'.$equipe->id) }}"><abbr title="{{ $equipe->description }}">{{ $equipe->nom }}</abbr> ({{ $equipe->organisation->nom }})</a></li>
               @endif
             @endforeach
           </ul>
