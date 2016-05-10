@@ -64,7 +64,7 @@ Author's custom styles
 body {
   font-family: 'Open Sans', 'Helvetica', sans-serif;
   overflow-x: hidden;
-  overflow-y: hidden;
+  /* overflow-y: hidden; */
   background: #f9f9f9;
   color: #333;
   margin-top: 60px;

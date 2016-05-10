@@ -38,13 +38,26 @@
     </div>
   <![endif]-->
 
-  <div id="loader">
+  <div class="no-js-alert alert alert-danger">
+    <p>Nous recommandons l'activation de <strong>JavaScript</strong> dans votre navigateur pour une exp&eacute;rience optimale.</p>
+  </div>
+  <style>.no-js-alert{display:none;} .no-js .no-js-alert{display:block;}</style>
+
+  <div id="loader" style="display: none;">
     <div class="loader-wrap">
       <div class="loader-inner ball-scale-multiple">
         <div></div><div></div><div></div>
       </div>
     </div>
   </div>
+  <script>
+    var loader = document.getElementById('loader');
+    loader.style.webkitDisplay = 'box';
+    loader.style.webkitDisplay = 'flex';
+    loader.style.msDisplay = 'flexbox';
+    loader.style.display = 'flex';
+    document.body.style.overflowY = 'hidden';
+  </script>
 
   <nav class="navbar navbar-default navbar-fixed-top">
     <div class="container">
@@ -85,8 +98,6 @@
                 </li>
               @else
                 <li class="dropdown">
-                  @if (Auth::user()->is_admin)
-                  @endif
                   @if (Auth::user()->auteur != null)
                     @if (Auth::user()->is_admin)
                       <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="badge tooltip-on" title="Administrateur" data-placement="bottom"><i class="fa fa-star"></i></span>&nbsp;{{ Auth::user()->auteur->prenom }} {{ Auth::user()->auteur->nom }}&nbsp;<i class="fa fa-angle-down"></i></span></a>
