@@ -179,7 +179,7 @@
           if ($('#modal_ok').attr('data-ok') == 'true') return true;
 
           var duplicate = false;
-          var inverse = false;
+          var inversed = false;
 
           var newNom = $('input[name="nom"]').val();
           var newPrenom = $('input[name="prenom"]').val();
