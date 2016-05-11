@@ -675,6 +675,10 @@ table tr.active th {
   display: block;
 }
 
+.has-error .btn-file {
+  border-color: #a94442;
+}
+
 .ms-elem-selectable span {
   text-align: right;
 }
@@ -689,6 +693,14 @@ table tr.active th {
   font-variant: small-caps;
   text-transform: uppercase;
   font-size: 0.9em;
+}
+
+.has-error .ms-header {
+  border-color: #a94442;
+  color: #333;
+}
+.has-error .ms-container .ms-list {
+  border-color: #a94442;
 }
 
 .panel hr {

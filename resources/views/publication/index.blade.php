@@ -40,11 +40,11 @@
 
                 <p class="clearfix"></p>
 
-                <form class="" action="{{ url('/search/results') }}" method="GET" role="form">
+                <form class="js-validate" action="{{ url('/search/results') }}" method="GET" role="form">
                   {!! csrf_field() !!}
                   <div class="form-group">
                     <div class="input-group input-group-lg">
-                      <input required name="query_v" type="text" class="form-control input-lg" placeholder="Rechercher une publication, un auteur, ...">
+                      <input required minlength="2" maxlength="255" name="query_v" type="text" class="form-control input-lg" placeholder="Rechercher une publication, un auteur, ...">
                       <input type="hidden" name="s_type" value="all">
                       <span class="input-group-btn">
                         <button type="submit" class="btn btn-lg btn-theme"><i class="fa fa-search"></i></button>

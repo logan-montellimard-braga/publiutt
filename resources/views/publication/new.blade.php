@@ -37,7 +37,7 @@
         <a href="{{ url('/publications') }}"><i class="fa fa-angle-left"></i>&nbsp;Retour aux publications</a>
         <h2>Ajouter une publication</h2>
 
-        <form id="add" action="{{ url('/publications') }}" method="POST" role="form" enctype="multipart/form-data">
+        <form id="add" action="{{ url('/publications') }}" method="POST" role="form" enctype="multipart/form-data" class="js-validate manual-validate">
           {!! csrf_field() !!}
 
           <div class="form-group{{ $errors->has('titre') ? ' has-error' : '' }}">
@@ -206,7 +206,7 @@
     @endforeach
   ];
 
-  window.jqReady = function() {
+  window.jqReady = function(config) {
     $.getScript('/js/vendor/jquery.quicksearch.min.js', function() {
       $('#auteurs_ms').multiSelect({
         keepOrder: true,
@@ -239,54 +239,57 @@
       $('section form').submit();
     });
 
-    $('#add').submit(function() {
-        var selections = [];
-        var sels = $('#ms-auteurs_ms .ms-selection .ms-list li:visible');
-        $.each(sels, function(i, el) {
-          var str = $(el).find('span').text();
-          var opt = $('form option:contains("' + str + '")');
-          $.each(opt, function(j, ell) {
-            selections.push($(ell).attr('value'));
-          });
+    var conf = config.validation;
+    conf.submitHandler = function(form) {
+      var selections = [];
+      var sels = $('#ms-auteurs_ms .ms-selection .ms-list li:visible');
+      $.each(sels, function(i, el) {
+        var str = $(el).find('span').text();
+        var opt = $('form option:contains("' + str + '")');
+        $.each(opt, function(j, ell) {
+          selections.push($(ell).attr('value'));
         });
-        $('#auteurs').val(selections);
+      });
+      $('#auteurs').val(selections);
 
 
-        if ($('#modal_ok').attr('data-ok') == 'true') return true;
-        var duplicate = false;
-        var duplicate_conference = false;
+      if ($('#modal_ok').attr('data-ok') == 'true') form.submit();
+      var duplicate = false;
+      var duplicate_conference = false;
 
-        var newTitre = $('input[name="titre"]').val();
-        var newLieu = $('input[name="lieu"]').val();
-        var isConf = $('[name="is_conference"]').is(':checked');
+      var newTitre = $('input[name="titre"]').val();
+      var newLieu = $('input[name="lieu"]').val();
+      var isConf = $('[name="is_conference"]').is(':checked');
 
-        for (var i = 0, len = pubList.length; i < len; i++) {
-          if (isConf && pubList[i].titre.toLowerCase() === newTitre.toLowerCase() &&
-             pubList[i].lieu.toLowerCase() === newLieu.toLowerCase()) {
-            duplicate_conference = true;
-          } else if (pubList[i].titre.toLowerCase() === newTitre.toLowerCase()) {
-            duplicate = true;
-          }
+      for (var i = 0, len = pubList.length; i < len; i++) {
+        if (isConf && pubList[i].titre.toLowerCase() === newTitre.toLowerCase() &&
+            pubList[i].lieu.toLowerCase() === newLieu.toLowerCase()) {
+              duplicate_conference = true;
+            } else if (pubList[i].titre.toLowerCase() === newTitre.toLowerCase()) {
+              duplicate = true;
+            }
+      }
+
+      if (duplicate || duplicate_conference) {
+        $('.modal_publication').text(newTitre);
+        $('#duplicateModal').modal('show');
+
+        if (duplicate_conference) {
+          $('.modal_lieu').text(newLieu);
+          $('#duplicateModal .duplicate').hide();
+          $('#duplicateModal .duplicate_conference').show();
         }
-
-        if (duplicate || duplicate_conference) {
-          $('.modal_publication').text(newTitre);
-          $('#duplicateModal').modal('show');
-
-          if (duplicate_conference) {
-            $('.modal_lieu').text(newLieu);
-            $('#duplicateModal .duplicate').hide();
-            $('#duplicateModal .duplicate_conference').show();
-          }
-          if (duplicate) {
-            $('#duplicateModal .duplicate').show();
-            $('#duplicateModal .duplicate_conference').hide();
-          }
-        } else {
-          return true;
+        if (duplicate) {
+          $('#duplicateModal .duplicate').show();
+          $('#duplicateModal .duplicate_conference').hide();
         }
-        return false;
-    })
+      } else {
+        form.submit();
+      }
+      return false;
+    };
+
+    $('#add').validate(conf);
 
     if (!($('#is_conference').is(':checked'))) $('#lieu').hide();
     $('#file_select').change(function() {

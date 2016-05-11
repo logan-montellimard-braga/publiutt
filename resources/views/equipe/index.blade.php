@@ -86,7 +86,7 @@
           <div class="row" id="add">
             <div class="col-md-8 col-md-offset-2">
               <h2>Ajouter une &eacute;quipe</h2>
-              <form action="{{ url('/equipes') }}" method="POST" role="form">
+              <form action="{{ url('/equipes') }}" method="POST" role="form" class="js-validate manual-validate">
                 {!! csrf_field() !!}
 
                 <div class="form-group{{ $errors->has('organisation') ? ' has-error' : '' }}">
@@ -157,35 +157,38 @@
           @endforeach
         @endforeach
     ];
-    var jqReady = function() {
+    var jqReady = function(config) {
         $(document).ready(function() {
             $('#modal_ok').click(function() {
                 $('#modal_ok').attr('data-ok', 'true');
                 $('#add form').submit();
             });
 
-            $('#add form').submit(function() {
-                if ($('#modal_ok').attr('data-ok') == 'true') return true;
+            var conf = config.validation;
+            conf.submitHandler = function(form) {
+              if ($('#modal_ok').attr('data-ok') == 'true') form.submit();
 
-                var duplicate = false;
+              var duplicate = false;
 
-                var newNom = $('input[name="nom"]').val();
-                var newOrga = $('select[name="organisation"]').val();
+              var newNom = $('input[name="nom"]').val();
+              var newOrga = $('select[name="organisation"]').val();
 
-                for (var i = 0, len = equipesList.length; i < len; i++) {
-                    if (equipesList[i].nom.toLowerCase() === newNom.toLowerCase() &&
-                        equipesList[i].organisation == newOrga)
-                        duplicate = true;
-            }
+              for (var i = 0, len = equipesList.length; i < len; i++) {
+                if (equipesList[i].nom.toLowerCase() === newNom.toLowerCase() &&
+                    equipesList[i].organisation == newOrga)
+                  duplicate = true;
+              }
 
-            if (duplicate) {
+              if (duplicate) {
                 $('#modal_equipe').text(newNom);
                 $('#duplicateModal').modal('show');
-            } else {
-                return true;
-            }
-            return false;
-            });
+              } else {
+                form.submit();
+              }
+              return false;
+            };
+
+            $('#add form').validate(conf);
         });
     };
     </script>

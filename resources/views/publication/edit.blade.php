@@ -24,7 +24,7 @@
         </div>
         <h2>Modifier la publication</h2>
 
-        <form id="add" action="{{ url('/publications/edit/'.$pub->id) }}" method="POST" role="form" enctype="multipart/form-data">
+        <form id="add" action="{{ url('/publications/edit/'.$pub->id) }}" method="POST" role="form" enctype="multipart/form-data" class="js-validate">
           {!! csrf_field() !!}
           {!! method_field('PATCH') !!}
 

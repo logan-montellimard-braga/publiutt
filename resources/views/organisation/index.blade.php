@@ -75,7 +75,7 @@
           <div class="row" id="add">
             <div class="col-md-8 col-md-offset-2">
               <h2>Ajouter une organisation</h2>
-              <form action="{{ url('/organisations') }}" method="POST" role="form">
+              <form class="js-validate manual-validate" action="{{ url('/organisations') }}" method="POST" role="form">
                 {!! csrf_field() !!}
 
                 <div class="form-group{{ $errors->has('institut') ? ' has-error' : '' }}">
@@ -83,7 +83,7 @@
                     <div class="input-group-addon">
                       <i class="fa fa-fw fa-flask"></i>
                     </div>
-                    <input required name="institut" type="text" class="form-control input-lg" value="{{ old('institut') }}" placeholder="Institut de recherche...">
+                    <input minlength="2" maxlength="255" required name="institut" type="text" class="form-control input-lg" value="{{ old('institut') }}" placeholder="Institut de recherche...">
                   </div>
                   @if ($errors->has('institut'))
                   <span class="help-block">
@@ -97,7 +97,7 @@
                     <div class="input-group-addon">
                       <i class="fa fa-fw fa-university"></i>
                     </div>
-                    <input required name="etablissement" type="text" class="form-control input-lg" value="{{ old('etablissement') }}" placeholder="&Eacute;tablissement...">
+                    <input minlength="2" maxlength="255" required name="etablissement" type="text" class="form-control input-lg" value="{{ old('etablissement') }}" placeholder="&Eacute;tablissement...">
                   </div>
                   @if ($errors->has('etablissement'))
                   <span class="help-block">
@@ -122,15 +122,16 @@
         { nom: "{!! $organisation->nom !!}", etablissement: "{!! $organisation->etablissement !!}" },
       @endforeach
       ];
-    var jqReady = function() {
+    var jqReady = function(config) {
       $(document).ready(function() {
         $('#modal_ok').click(function() {
           $('#modal_ok').attr('data-ok', 'true');
           $('#add form').submit();
         });
 
-        $('#add form').submit(function() {
-          if ($('#modal_ok').attr('data-ok') == 'true') return true;
+        var conf = config.validation;
+        conf.submitHandler = function(form) {
+          if ($('#modal_ok').attr('data-ok') == 'true') form.submit();
 
           var duplicate = false;
 
@@ -147,10 +148,12 @@
             $('#modal_organisation').text(newNom + ' (' + newEtab + ')');
             $('#duplicateModal').modal('show');
           } else {
-            return true;
+            form.submit();
           }
           return false;
-        });
+        };
+
+        $('#add form').validate(conf);
       });
     };
     </script>

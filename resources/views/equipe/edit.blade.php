@@ -9,7 +9,7 @@
       <div class="col-md-8 col-md-offset-2">
         <a href="{{ url('/equipes/show/'.$equipe->id) }}"><i class="fa fa-angle-left"></i>&nbsp;Retour &agrave; l'&eacute;quipe</a>
         <h2>Modifier l'&eacute;quipe</h2>
-        <form action="{{ url('/equipes/edit/'.$equipe->id) }}" method="POST" role="form">
+        <form class="js-validate" action="{{ url('/equipes/edit/'.$equipe->id) }}" method="POST" role="form">
           {!! method_field('PATCH') !!}
           {!! csrf_field() !!}
 

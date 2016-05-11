@@ -9,7 +9,7 @@
         <div class="row">
             <div class="col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3 bloc-form">
                 <h1 class="title"><a href="{{ url('/') }}">Publi<b>UTT</b></a></h1>
-                <form role="form" method="POST" action="{{ url('/register') }}">
+                <form role="form" method="POST" action="{{ url('/register') }}" class="js-validate">
                     {!! csrf_field() !!}
 
                     <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">

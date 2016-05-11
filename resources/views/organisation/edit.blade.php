@@ -14,7 +14,7 @@
         <p class="clearfix visible-xs"></p>
       </div>
       <h2>Modifier l'organisation</h2>
-      <form action="{{ url('/organisations/edit/'.$organisation->id) }}" method="POST" role="form">
+      <form class="js-validate" action="{{ url('/organisations/edit/'.$organisation->id) }}" method="POST" role="form">
         {!! csrf_field() !!}
         {!! method_field('PATCH') !!}
 

@@ -8,7 +8,7 @@
       <div class="col-md-8 col-md-offset-2">
         <a href="{{ url('/auteurs/show/'.$auteur->id) }}"><i class="fa fa-angle-left"></i>&nbsp;Retour &agrave; l'auteur</a>
         <h2>Modifier l'auteur</h2>
-        <form action="{{ url('/auteurs/edit/'.$auteur->id) }}" method="POST" role="form">
+        <form class="js-validate" action="{{ url('/auteurs/edit/'.$auteur->id) }}" method="POST" role="form">
           {!! method_field('PATCH') !!}
           {!! csrf_field() !!}
 
