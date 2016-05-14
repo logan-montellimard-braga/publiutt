@@ -9,7 +9,7 @@
         <a href="{{ url('/profil') }}"><i class="fa fa-angle-left"></i>&nbsp;Retour au profil</a>
         <h2>Modification du profil</h2>
         <br>
-        <form role="form" method="POST" action="{{ url('/users/edit/'.$user->id) }}">
+        <form class="js-validate" role="form" method="POST" action="{{ url('/users/edit/'.$user->id) }}">
           {!! csrf_field() !!}
           {!! method_field('PATCH') !!}
 
