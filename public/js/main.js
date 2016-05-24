@@ -4,6 +4,9 @@
 
   var validateConfig = {
     rules: {
+      email: {
+        email_utt: true,
+      },
       annee: {
         annee: true,
       },
@@ -116,6 +119,10 @@
       $.validator.addMethod("annee", function(value, element) {
         return /^(19[5-9]\d|200\d|201[0-6])$/.test(value);
       }, "Veuillez fournir une année comprise entre 1950 et 2016.");
+
+      $.validator.addMethod("email_utt", function(value, element) {
+        return /@utt.fr$/.test(value);
+      }, "Veuillez fournir une adresse email de l'UTT.");
 
       $.extend($.validator.messages, {
         required: "Ce champ est obligatoire.",
