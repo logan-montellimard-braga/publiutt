@@ -93,6 +93,20 @@
             @endif
           </div>
 
+          <div id="lieu" class="form-group{{ $errors->has('lieu') ? ' has-error' : '' }}">
+            <div class="input-group input-group-lg">
+              <div class="input-group-addon">
+                <i class="fa fa-fw fa-map-marker"></i>
+              </div>
+              <input name="lieu" type="text" class="form-control input-lg" value="{{ old('lieu', $pub->lieu) }}" placeholder="Lieu de la conf&eacute;rence...">
+            </div>
+            @if ($errors->has('lieu'))
+            <span class="help-block">
+              <strong>{{ $errors->first('lieu') }}</strong>
+            </span>
+            @endif
+          </div>
+
           <div class="form-group{{ $errors->has('statut') ? ' has-error' : '' }}">
             <div class="input-group input-group-lg">
               <div class="input-group-addon">
@@ -162,29 +176,12 @@
             @endif
           </div>
 
-          <div class="form-group">
+          <div class="hidden-xs hidden-sm hidden-md hidden-lg form-group">
             <div class="input-group input-group-lg">
               <div class="checkbox checkbox-primary">
                 <input name="is_conference" id="is_conference" class="styled" type="checkbox" {{ old('is_conference', $pub->lieu) ? 'checked' : '' }}>
-                <label for="is_conference">
-                  La publication est une conf&eacute;rence
-                </label>
               </div>
             </div>
-          </div>
-
-          <div id="lieu" class="form-group{{ $errors->has('lieu') ? ' has-error' : '' }}">
-            <div class="input-group input-group-lg">
-              <div class="input-group-addon">
-                <i class="fa fa-fw fa-map-marker"></i>
-              </div>
-              <input name="lieu" type="text" class="form-control input-lg" value="{{ old('lieu', $pub->lieu) }}" placeholder="Lieu de la conf&eacute;rence...">
-            </div>
-            @if ($errors->has('lieu'))
-            <span class="help-block">
-              <strong>{{ $errors->first('lieu') }}</strong>
-            </span>
-            @endif
           </div>
 
           <div class="form-group text-right">
@@ -235,6 +232,9 @@ $('#add').submit(function() {
         });
     });
     $('#auteurs').val(selections);
+
+    if (!($('#is_conference').is(':checked')))
+        $('[name="lieu"]').val(null);
 })
 
     if (!($('#is_conference').is(':checked'))) $('#lieu').hide();
@@ -250,7 +250,17 @@ $('#is_conference').change(function() {
         $('#lieu').val('');
         $('#lieu').fadeOut(300);
     }
-})
+});
+$('[name="categorie"]').change(function() {
+    var label = $($('[value="' + this.value + '"]')[0]).text();
+    if (label.toLowerCase().indexOf("conférence") > -1) {
+        $('#is_conference').prop('checked', true);
+        $('#is_conference').change();
+} else {
+    $('#is_conference').prop('checked', false);
+    $('#is_conference').change();
+}
+});
 };
 </script>
   @endsection
